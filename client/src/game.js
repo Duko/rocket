@@ -11,6 +11,7 @@ rocket.Game = function(divName) {
 
 rocket.Game.prototype.run = function() {
     this.game = new Phaser.Game(800, 600, Phaser.AUTO, this.divName, this.config);
+
 }
 
 rocket.Game.prototype.preload = function() {
@@ -23,6 +24,7 @@ rocket.Game.prototype.create = function() {
 
     game.state.add('menu', new rocket.MenuStage());
     game.state.add('lander', new rocket.LanderStage());
+    game.state.add('options', new rocket.OptionsStage());
 
     game.state.start('menu');
 };

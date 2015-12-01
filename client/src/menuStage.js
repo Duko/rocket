@@ -13,6 +13,9 @@ rocket.MenuStage.prototype.create = function() {
 
     var startText = this.add.button(100, 100, 'start');
     startText.onInputDown.add(this.startGameClick, this);
+
+    var optionsButton = this.add.button(100, 200, 'start');
+    optionsButton.onInputDown.add(this.showOptions, this);
 };
 
 rocket.MenuStage.prototype.update = function() {
@@ -21,4 +24,8 @@ rocket.MenuStage.prototype.update = function() {
 
 rocket.MenuStage.prototype.startGameClick = function () {
     this.state.start('lander');
+};
+
+rocket.MenuStage.prototype.showOptions = function () {
+    this.state.start('options');
 };
