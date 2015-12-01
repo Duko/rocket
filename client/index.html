@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Rocket</title>
+	<script src="node_modules/phaser/build/phaser.min.js"></script>
+        <script src="src/game.js"></script>
+        <script src="src/textButton.js"></script>
+        <script src="src/menuStage.js"></script>
+        <script src="src/landerStage.js"></script>
+    </head>
+    <body>
+        <div id="game"></div>
+        <script type="text/javascript">
+            var game = new rocket.Game('game');
+            game.run();
+        </script>
+    </body>
+</html>
