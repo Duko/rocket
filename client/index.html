@@ -1,17 +1,26 @@
 <!doctype html>
 <html>
     <head>
+        <style>
+            .fontPreload{
+                position:absolute;
+                left:-100px;
+            }
+        </style>
         <meta charset="UTF-8" />
         <title>Rocket</title>
-	<script src="node_modules/phaser/build/phaser.min.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+        <script src="node_modules/phaser/build/phaser.min.js"></script>
         <script src="src/game.js"></script>
         <script src="src/menuStage.js"></script>
         <script src="src/landerStage.js"></script>
         <script src="src/sun.js"></script>
         <script src="src/planet.js"></script>
         <script src="src/rocket.js"></script>
+        <script src="src/text.js"></script>
     </head>
     <body>
+        <div class="fontPreload" style="font-family: Roboto Mono;">.</div>
         <div id="game"></div>
         <script type="text/javascript">
             var game = new rocket.Game('game');

@@ -15,6 +15,7 @@ rocket.Game.prototype.run = function() {
 };
 
 rocket.Game.prototype.preload = function() {
+
 };
 
 rocket.Game.prototype.create = function() {
