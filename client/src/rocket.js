@@ -13,7 +13,9 @@ rocket.Rocket = function (game) {
     this.game = game;
     this.sprite = sprite;
     this.body = body;
-}
+
+    game.camera.follow(this.sprite);
+};
 
 rocket.Rocket.preload = function (game) {
     game.load.image('rocket', 'sprites/rockets/s1.png');
@@ -35,4 +37,8 @@ rocket.Rocket.prototype.update = function () {
     if (cursors.right.isDown) {
         body.angularForce += 14;
     }
+};
+
+rocket.Rocket.prototype.postUpdate = function () {
+
 };

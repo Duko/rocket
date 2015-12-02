@@ -5,7 +5,8 @@ rocket.Game = function(divName) {
     this.config = {
         preload: this.preload,
         create: this.create,
-        update: this.update
+        update: this.update,
+        render: this.render
     };
 };
 
@@ -21,7 +22,7 @@ rocket.Game.prototype.create = function() {
     var game = this.game;
 
     game.state.add('menu', new rocket.MenuStage());
-    game.state.add('lander', new rocket.LanderStage());
+    game.state.add('lander', new rocket.LanderStage(game));
 
     game.state.start('menu');
 };
@@ -29,3 +30,7 @@ rocket.Game.prototype.create = function() {
 rocket.Game.prototype.update = function() {
 };
 
+rocket.Game.prototype.render = function() {
+    this.game.debug.cameraInfo(this.game.camera, this.game.camera.x, this.game.camera.y);
+    //game.debug.spriteCoords(player, 32, 500);
+};

@@ -1,6 +1,8 @@
 var rocket = rocket || {};
 
-rocket.LanderStage = function() {
+rocket.LanderStage = function(game) {
+    this.game = game;
+    this.worldScale = 1;
 };
 
 rocket.LanderStage.prototype.preload = function() {
@@ -19,16 +21,12 @@ rocket.LanderStage.prototype.create = function() {
     this.physics.startSystem(Phaser.Physics.P2JS);
     this.physics.p2.createCollisionGroup();
 
-    // setup debug camera
-    this.cursors = this.input.keyboard.createCursorKeys();
-
     // add actors
     var sun = new rocket.Sun(this);
     var planet = new rocket.Planet(this, 0.7, sun.body, 4000, -0.0001, 0.001);
     var moon = new rocket.Planet(this, 0.3, planet.body, 1000, 0.001, 0.01);
 
     var r = new rocket.Rocket(this);
-
 
     this.sun = sun;
     this.planet = planet;
@@ -37,33 +35,21 @@ rocket.LanderStage.prototype.create = function() {
 };
 
 rocket.LanderStage.prototype.update = function() {
+    var game = this.game;
 
-    //this.camera.x = this.rocket.body.x - 400;
-    //this.camera.y = this.rocket.body.y - 300;
-
-    var cursors = this.cursors;
-
-/*
-    if (cursors.left.isDown) {
-        this.camera.x -= 40;
+    // zoom
+    if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
+        this.worldScale += 0.05;
     }
-    if (cursors.right.isDown) {
-        this.camera.x += 40;
-    }
-    if (cursors.up.isDown) {
-        this.camera.y -= 40;
-    }
-    if (cursors.down.isDown) {
-        this.camera.y += 40;
-    }
-*/
-    if (cursors.left.isDown && cursors.right.isDown) {
-        this.world.scale.set(0.2);
+    else if (game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
+        this.worldScale -= 0.05;
     }
 
-    if (cursors.up.isDown && cursors.down.isDown) {
-        this.world.scale.set(1);
-    }
+    // set a minimum and maximum scale value
+    this.worldScale = Phaser.Math.clamp(this.worldScale, 0.05, 2);
+
+    // set our world scale as needed
+    game.world.scale.set(this.worldScale);
 
     this.planet.update();
     this.moon.update();
