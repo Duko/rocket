@@ -27,7 +27,8 @@ rocket.LanderStage.prototype.create = function() {
     var moon = new rocket.Planet(this, 0.3, planet.body, 1000, 0.001, 0.01);
 
     var r = new rocket.Rocket(this);
-    this.game.camera.follow(r.sprite);
+    this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_TOPDOWN);
+    this.game.camera.roundPx = false;
 
     this.sun = sun;
     this.planet = planet;
