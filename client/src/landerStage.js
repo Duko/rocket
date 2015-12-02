@@ -39,10 +39,10 @@ rocket.LanderStage.prototype.update = function() {
 
     // zoom
     if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-        this.worldScale += 0.05;
+        this.worldScale += 0.01;
     }
     else if (game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
-        this.worldScale -= 0.05;
+        this.worldScale -= 0.01;
     }
 
     // set a minimum and maximum scale value
