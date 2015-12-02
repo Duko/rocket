@@ -11,13 +11,12 @@ rocket.Game = function(divName) {
 
 rocket.Game.prototype.run = function() {
     this.game = new Phaser.Game(800, 600, Phaser.AUTO, this.divName, this.config);
-}
+};
 
 rocket.Game.prototype.preload = function() {
 };
 
 rocket.Game.prototype.create = function() {
-    console.log('game create');
 
     var game = this.game;
 
@@ -28,6 +27,5 @@ rocket.Game.prototype.create = function() {
 };
 
 rocket.Game.prototype.update = function() {
-    console.log('game update');
 };
 
