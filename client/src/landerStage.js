@@ -27,6 +27,7 @@ rocket.LanderStage.prototype.create = function() {
     var moon = new rocket.Planet(this, 0.3, planet.body, 1000, 0.001, 0.01);
 
     var r = new rocket.Rocket(this);
+    this.game.camera.follow(r.sprite);
 
     this.sun = sun;
     this.planet = planet;
@@ -39,10 +40,10 @@ rocket.LanderStage.prototype.update = function() {
 
     // zoom
     if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-        this.worldScale += 0.01;
+        this.worldScale += 0.007;
     }
     else if (game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
-        this.worldScale -= 0.01;
+        this.worldScale -= 0.007;
     }
 
     // set a minimum and maximum scale value
@@ -54,4 +55,9 @@ rocket.LanderStage.prototype.update = function() {
     this.planet.update();
     this.moon.update();
     this.rocket.update();
+};
+
+rocket.LanderStage.prototype.render = function() {
+    this.game.debug.spriteCoords(this.rocket.sprite, 32, 500);
+    this.game.debug.cameraInfo(this.game.camera, 32, 32);
 };

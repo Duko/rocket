@@ -31,6 +31,4 @@ rocket.Game.prototype.update = function() {
 };
 
 rocket.Game.prototype.render = function() {
-    this.game.debug.cameraInfo(this.game.camera, this.game.camera.x, this.game.camera.y);
-    //game.debug.spriteCoords(player, 32, 500);
 };

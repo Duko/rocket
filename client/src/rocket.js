@@ -13,8 +13,6 @@ rocket.Rocket = function (game) {
     this.game = game;
     this.sprite = sprite;
     this.body = body;
-
-    game.camera.follow(this.sprite);
 };
 
 rocket.Rocket.preload = function (game) {
