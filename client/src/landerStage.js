@@ -26,7 +26,7 @@ rocket.LanderStage.prototype.create = function() {
     // add actors
     var sun = new rocket.Planet(this, {
         key: 'sun',
-        mass: 10000000000000
+        mass: 10000000
     });
 
     var planet = new rocket.Planet(this, {
@@ -87,6 +87,7 @@ rocket.LanderStage.prototype.update = function() {
     // set our world scale as needed
     game.world.scale.set(this.worldScale);
 
+    this.sun.update();
     this.planet.update();
     this.moon.update();
     this.rocket.update();
