@@ -15,7 +15,7 @@ rocket.LanderStage.prototype.preload = function() {
 };
 
 rocket.LanderStage.prototype.create = function() {
-    var starfield = this.game.add.tileSprite(0, 0, 1920, 1920, 'bg_stars');
+    var starfield = this.game.add.tileSprite(0, 0, 20000, 20000, 'bg_stars');
     starfield.fixedToCamera = true;
     // setup stage
     this.world.setBounds(-10000, -10000, 20000, 20000);
@@ -49,7 +49,7 @@ rocket.LanderStage.prototype.create = function() {
     });
 
     var r = new rocket.Rocket(this);
-    this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_TOPDOWN);
+    this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_LOCKON);
     this.game.camera.roundPx = false;
 
     this.sun = sun;
@@ -82,7 +82,7 @@ rocket.LanderStage.prototype.update = function() {
     }
 
     // set a minimum and maximum scale value
-    this.worldScale = Phaser.Math.clamp(this.worldScale, 0.05, 2);
+    this.worldScale = Phaser.Math.clamp(this.worldScale, 0.2, 1.5);
 
     // set our world scale as needed
     game.world.scale.set(this.worldScale);
