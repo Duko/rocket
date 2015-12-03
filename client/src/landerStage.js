@@ -36,8 +36,9 @@ rocket.LanderStage.prototype.create = function() {
         parentBody: sun.body,
         orbitRadius: 6000,
         orbitSpeed: -0.00001,
-        spinSpeed: 0.0001
+        spinSpeed: 0.001
     });
+
     var moon = new rocket.Planet(this, {
         key: 'moon',
         mass: 2500000,

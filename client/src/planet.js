@@ -8,6 +8,7 @@ rocket.Planet = function (game, config) {
         orbitRadius = config.orbitRadius || 0.0,
         orbitSpeed = config.orbitSpeed || 0.0,
         spinSpeed = config.spinSpeed || 0.0;
+        atmo = config.atmo || 100;
 
     var sprite = game.add.sprite(
         parentBody ? parentBody.x + orbitRadius : 0,
@@ -35,6 +36,7 @@ rocket.Planet = function (game, config) {
     this.sprite = sprite;
     this.body = body;
     this.parentBody = parentBody;
+    this.scale = scale;
 };
 
 rocket.Planet.preload = function (game) {
@@ -57,8 +59,20 @@ rocket.Planet.prototype.update = function () {
         this.game.rocket.body.x - this.body.x,
         this.game.rocket.body.y - this.body.y
     );
+
     var g = 9.8 * (this.mass * 1.0 ) / toRocket.getMagnitudeSq();     // "1.0" is ship mass
-    var force = toRocket.setMagnitude(g);
+    var force = toRocket.clone().setMagnitude(g);
     this.game.rocket.body.force.x -= force.x;
     this.game.rocket.body.force.y -= force.y;
+
+    var r = (this.sprite.width - 400*this.scale) / 2;
+    var surfaceSpeed = this.spinSpeed * r;
+    var effect = 1.0 / Math.max(1, toRocket.getMagnitude() - r - atmo);
+    if (effect < 0.01)
+        effect = 0;
+    var spinDrag = toRocket.clone().perp().setMagnitude(surfaceSpeed * effect);
+
+    this.game.rocket.body.x += spinDrag.x;
+    this.game.rocket.body.y += spinDrag.y;
+    this.game.rocket.body.roation += this.spinSpeed * effect;
 };
