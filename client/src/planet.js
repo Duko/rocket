@@ -1,6 +1,13 @@
 var rocket = rocket || {};
 
-rocket.Planet = function (game, key, mass, scale, parentBody, orbitRadius, orbitSpeed, spinSpeed) {
+rocket.Planet = function (game, config) {
+    var key = config.key || 'moon',
+        mass = config.mass || 1000000,
+        scale = config.scale || 1.0,
+        parentBody = config.parentBody || null,
+        orbitRadius = config.orbitRadius || 0.0,
+        orbitSpeed = config.orbitSpeed || 0.0,
+        spinSpeed = config.spinSpeed || 0.0;
 
     var sprite = game.add.sprite(
         parentBody.x + orbitRadius,

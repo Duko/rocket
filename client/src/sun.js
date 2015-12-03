@@ -1,6 +1,8 @@
 var rocket = rocket || {};
 
-rocket.Sun = function (game, mass) {
+rocket.Sun = function (game, config) {
+
+    var mass = config.mass || 100000;
 
     var sprite = game.add.sprite(0, 0, 'sun');
 

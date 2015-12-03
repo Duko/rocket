@@ -22,9 +22,28 @@ rocket.LanderStage.prototype.create = function() {
     this.physics.p2.createCollisionGroup();
 
     // add actors
-    var sun = new rocket.Sun(this, 1000000000);
-    var planet = new rocket.Planet(this, 'orange', 20000000, 0.7, sun.body, 6000, -0.0001, 0.001);
-    var moon = new rocket.Planet(this, 'moon', 1000000, 0.3, planet.body, 3000, 0.001, 0.01);
+    var sun = new rocket.Sun(this, {
+        mass: 1000000000
+    });
+
+    var planet = new rocket.Planet(this, {
+        key: 'orange',
+        mass: 20000000,
+        scale: 0.7,
+        parentBody: sun.body,
+        orbitRadius: 6000,
+        orbitSpeed: -0.0001,
+        spinSpeed: 0.001
+    });
+    var moon = new rocket.Planet(this, {
+        key: 'moon',
+        mass: 1000000,
+        scale: 0.3,
+        parentBody: planet.body,
+        orbitRadius: 3000,
+        orbitSpeed: 0.001,
+        spinSpeed: 0.01
+    });
 
     var r = new rocket.Rocket(this);
     this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_TOPDOWN);
