@@ -20,6 +20,7 @@ rocket.LanderStage.prototype.create = function() {
     // setup stage
     this.world.setBounds(-10000, -10000, 20000, 20000);
     this.physics.startSystem(Phaser.Physics.P2JS);
+    this.physics.p2.restitution = 0.0;
     this.physics.p2.createCollisionGroup();
 
     // add actors
