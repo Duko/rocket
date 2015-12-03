@@ -15,6 +15,7 @@ rocket.Rocket = function (game, config) {
     this.body = body;
     this.thrust = 0;
     this.maxThrust = maxThrust;
+    this.thrustOn = false;
 };
 
 rocket.Rocket.preload = function (game) {
@@ -39,7 +40,12 @@ rocket.Rocket.prototype.update = function () {
         this.thrust -= 1;
     }
 
-    body.thrust(this.thrust);
+    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+        body.thrust(this.thrust);
+        this.thrustOn = true;
+    } else {
+        this.thrustOn = false;
+    }
     // Thrust End
 
     if (cursors.left.isDown) {

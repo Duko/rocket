@@ -114,9 +114,9 @@ rocket.LanderStage.prototype.render = function() {
     this.game.debug.body(this.moon.body);
     this.game.debug.cameraInfo(this.game.camera, 32, 32);
 
-    this.game.debug.text("TH: "+this.rocket.thrust, 100, 380 );
-    this.game.debug.text("VX: "+this.rocket.body.velocity.x, 100, 400 );
-    this.game.debug.text("VY: "+this.rocket.body.velocity.y, 100, 420 );
+    this.game.debug.text("TH: " + this.rocket.thrust + " On: " + this.rocket.thrustOn, 100, 380 );
+    this.game.debug.text("VX: " + this.rocket.body.velocity.x, 100, 400 );
+    this.game.debug.text("VY: " + this.rocket.body.velocity.y, 100, 420 );
 };
 
 rocket.LanderStage.prototype.enableDebug = function() {
