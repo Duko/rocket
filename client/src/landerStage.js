@@ -10,7 +10,6 @@ rocket.LanderStage.prototype.preload = function() {
 
     this.load.image('bg_stars', 'sprites/bg/stars.jpg');
 
-    rocket.Sun.preload(this);
     rocket.Planet.preload(this);
     rocket.Rocket.preload(this);
 };
