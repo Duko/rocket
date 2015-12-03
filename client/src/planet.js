@@ -40,6 +40,7 @@ rocket.Planet = function (game, config) {
 rocket.Planet.preload = function (game) {
     game.load.image('orange', 'sprites/bodies/orange.png');
     game.load.image('moon', 'sprites/bodies/moon.png');
+    game.load.image('sun', 'sprites/bodies/sun.png');
 };
 
 rocket.Planet.prototype.update = function () {
