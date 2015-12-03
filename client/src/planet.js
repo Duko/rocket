@@ -30,7 +30,7 @@ rocket.Planet = function (game, scale, parentBody, orbitRadius, orbitSpeed, spin
 };
 
 rocket.Planet.preload = function (game) {
-    game.load.image('red', 'sprites/sun/redGiant.png');
+    game.load.image('red', 'sprites/bodies/moon.png');
 };
 
 rocket.Planet.prototype.update = function () {
