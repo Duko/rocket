@@ -30,21 +30,21 @@ rocket.LanderStage.prototype.create = function() {
 
     var planet = new rocket.Planet(this, {
         key: 'orange',
-        mass: 20000000,
+        mass: 4500000,
         scale: 0.7,
         parentBody: sun.body,
         orbitRadius: 6000,
-        orbitSpeed: -0.0001,
-        spinSpeed: 0.001
+        orbitSpeed: -0.00001,
+        spinSpeed: 0.0001
     });
     var moon = new rocket.Planet(this, {
         key: 'moon',
-        mass: 1000000,
-        scale: 0.3,
+        mass: 2500000,
+        scale: 0.5,
         parentBody: planet.body,
         orbitRadius: 3000,
-        orbitSpeed: 0.001,
-        spinSpeed: 0.01
+        orbitSpeed: 0.0001,
+        spinSpeed: 0.001
     });
 
     var r = new rocket.Rocket(this);

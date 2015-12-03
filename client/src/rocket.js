@@ -25,15 +25,15 @@ rocket.Rocket.prototype.update = function () {
         cursors = game.input.keyboard.createCursorKeys();
 
     if (cursors.up.isDown) {
-        body.thrust(400);
+        body.thrust(160);
     }
 
     if (cursors.left.isDown) {
-        body.angularForce -= 14;
+        body.angularForce -= 4;
     }
 
     if (cursors.right.isDown) {
-        body.angularForce += 14;
+        body.angularForce += 4;
     }
 };
 
