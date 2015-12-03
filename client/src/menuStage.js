@@ -11,7 +11,7 @@ rocket.MenuStage.prototype.preload = function() {
 rocket.MenuStage.prototype.create = function() {
     console.log('menustage create');
 
-    var titleText = rocket.createText(this, 70, "Rocket");
+    var titleText = rocket.createText(this, 35, "ASTRONOMER");
     titleText.x = this.world.centerX;
     titleText.y = 100;
     titleText.anchor.setTo(.5,.5);
@@ -21,15 +21,17 @@ rocket.MenuStage.prototype.create = function() {
 
     this.menu = menu;
 
-    var startText = rocket.createText(this, 30, "Start Game");
-    startText.x = posX;
+    var startText = rocket.createText(this, 20, "START GAME");
+    startText.x = this.world.centerX;
     startText.y = 0;
     startText.inputEnabled = true;
+    startText.anchor.setTo(.5,.5);
     startText.events.onInputDown.add(this.startGameClick, this);
 
     menu.add(startText);
-    menu.x = 100;
+    menu.x = 0;
     menu.y = 200;
+
 
 };
 

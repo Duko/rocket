@@ -9,8 +9,8 @@ rocket.createText = function(game, size, string) {
     text.font = 'Roboto Mono';
     text.fontSize = size;
     text.align = 'right';
-    text.fill = '#7ac8ff';
-    text.setShadow(0, 0, '#00d2ff', 8);
+    text.fill = '#6fc4ff';
+    text.setShadow(0, 0, '#0070cf', 8);
 
     return text;
 };
