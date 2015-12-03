@@ -11,7 +11,7 @@ rocket.Game = function(divName) {
 };
 
 rocket.Game.prototype.run = function() {
-    this.game = new Phaser.Game(800, 600, Phaser.AUTO, this.divName, this.config);
+    this.game = new Phaser.Game(1024, 768, Phaser.AUTO, this.divName, this.config);
 };
 
 rocket.Game.prototype.preload = function() {

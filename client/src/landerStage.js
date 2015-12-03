@@ -3,6 +3,7 @@ var rocket = rocket || {};
 rocket.LanderStage = function(game) {
     this.game = game;
     this.worldScale = 1;
+    this.debugSprite = null;
 };
 
 rocket.LanderStage.prototype.preload = function() {
@@ -53,6 +54,20 @@ rocket.LanderStage.prototype.create = function() {
     this.planet = planet;
     this.moon = moon;
     this.rocket = r;
+
+    this.addDebugToObject(this.sun);
+    this.addDebugToObject(this.planet);
+    this.addDebugToObject(this.moon);
+    this.addDebugToObject(this.rocket);
+};
+
+rocket.LanderStage.prototype.addDebugToObject = function (object) {
+    object.sprite.inputEnabled = true;
+    object.sprite.events.onInputDown.add(this.addDebugToSprite, this);
+};
+
+rocket.LanderStage.prototype.addDebugToSprite = function (item) {
+    this.debugSprite = item;
 };
 
 rocket.LanderStage.prototype.update = function() {
@@ -78,6 +93,11 @@ rocket.LanderStage.prototype.update = function() {
 };
 
 rocket.LanderStage.prototype.render = function() {
-    this.game.debug.spriteCoords(this.rocket.sprite, 32, 500);
+    if (this.debugSprite != null) {
+        this.game.debug.spriteCoords(this.debugSprite, 32, this.game.height - 50);
+    }
+    this.game.debug.body(this.rocket.body);
+    this.game.debug.body(this.planet.body);
+    this.game.debug.body(this.moon.body);
     this.game.debug.cameraInfo(this.game.camera, 32, 32);
 };
