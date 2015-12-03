@@ -16,7 +16,8 @@ rocket.LanderStage.prototype.preload = function() {
 };
 
 rocket.LanderStage.prototype.create = function() {
-
+    var starfield = this.game.add.tileSprite(0, 0, 1920, 1920, 'bg_stars');
+    starfield.fixedToCamera = true;
     // setup stage
     this.world.setBounds(-10000, -10000, 20000, 20000);
     this.physics.startSystem(Phaser.Physics.P2JS);
@@ -52,14 +53,12 @@ rocket.LanderStage.prototype.create = function() {
     this.game.camera.roundPx = false;
 
     this.sun = sun;
+    this.starfield = starfield;
     this.planet = planet;
     this.moon = moon;
     this.rocket = r;
 
-    this.addDebugToObject(this.sun);
-    this.addDebugToObject(this.planet);
-    this.addDebugToObject(this.moon);
-    this.addDebugToObject(this.rocket);
+    this.enableDebug();
 };
 
 rocket.LanderStage.prototype.addDebugToObject = function (object) {
@@ -91,6 +90,16 @@ rocket.LanderStage.prototype.update = function() {
     this.planet.update();
     this.moon.update();
     this.rocket.update();
+
+    if (!this.game.camera.atLimit.x)
+    {
+        this.starfield.tilePosition.x -= ((this.rocket.body.velocity.x) * this.game.time.physicsElapsed);
+    }
+
+    if (!this.game.camera.atLimit.y)
+    {
+        this.starfield.tilePosition.y -= ((this.rocket.body.velocity.y) * this.game.time.physicsElapsed);
+    }
 };
 
 rocket.LanderStage.prototype.render = function() {
@@ -102,3 +111,11 @@ rocket.LanderStage.prototype.render = function() {
     this.game.debug.body(this.moon.body);
     this.game.debug.cameraInfo(this.game.camera, 32, 32);
 };
+
+rocket.LanderStage.prototype.enableDebug = function() {
+    this.addDebugToObject(this.sun);
+    this.addDebugToObject(this.planet);
+    this.addDebugToObject(this.moon);
+    this.addDebugToObject(this.rocket);
+};
+
