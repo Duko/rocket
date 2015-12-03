@@ -48,7 +48,9 @@ rocket.LanderStage.prototype.create = function() {
         spinSpeed: 0.001
     });
 
-    var r = new rocket.Rocket(this);
+    var r = new rocket.Rocket(this, {
+        maxThrust: 160
+    });
     this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_LOCKON);
     this.game.camera.roundPx = false;
 
@@ -111,6 +113,10 @@ rocket.LanderStage.prototype.render = function() {
     this.game.debug.body(this.planet.body);
     this.game.debug.body(this.moon.body);
     this.game.debug.cameraInfo(this.game.camera, 32, 32);
+
+    this.game.debug.text("TH: "+this.rocket.thrust, 100, 380 );
+    this.game.debug.text("VX: "+this.rocket.body.velocity.x, 100, 400 );
+    this.game.debug.text("VY: "+this.rocket.body.velocity.y, 100, 420 );
 };
 
 rocket.LanderStage.prototype.enableDebug = function() {

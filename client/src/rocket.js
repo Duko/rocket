@@ -1,7 +1,7 @@
 var rocket = rocket || {};
 
-rocket.Rocket = function (game) {
-
+rocket.Rocket = function (game, config) {
+    var maxThrust = config.maxThrust || 0;
     var sprite = game.add.sprite(0, 2000, 'rocket');
 
     game.physics.p2.enable(sprite);
@@ -13,6 +13,8 @@ rocket.Rocket = function (game) {
     this.game = game;
     this.sprite = sprite;
     this.body = body;
+    this.thrust = 0;
+    this.maxThrust = maxThrust;
 };
 
 rocket.Rocket.preload = function (game) {
@@ -24,9 +26,21 @@ rocket.Rocket.prototype.update = function () {
         body = this.body,
         cursors = game.input.keyboard.createCursorKeys();
 
-    if (cursors.up.isDown) {
-        body.thrust(160);
+    // Thrust Start
+    if (game.input.keyboard.isDown(Phaser.Keyboard.X)) {
+        this.thrust = 0;
     }
+
+    if (cursors.up.isDown && this.thrust < this.maxThrust) {
+        this.thrust += 1;
+    }
+
+    if (cursors.down.isDown && this.thrust > 0) {
+        this.thrust -= 1;
+    }
+
+    body.thrust(this.thrust);
+    // Thrust End
 
     if (cursors.left.isDown) {
         body.angularForce -= 4;
