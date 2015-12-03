@@ -1,6 +1,6 @@
 var rocket = rocket || {};
 
-rocket.Sun = function (game) {
+rocket.Sun = function (game, mass) {
 
     var sprite = game.add.sprite(0, 0, 'sun');
 
@@ -13,6 +13,7 @@ rocket.Sun = function (game) {
     body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
     body.collides(game.physics.p2.collisionGroups[0]);
 
+    this.mass = mass;
     this.game = game;
     this.sprite = sprite;
     this.body = body;

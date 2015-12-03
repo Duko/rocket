@@ -1,11 +1,11 @@
 var rocket = rocket || {};
 
-rocket.Planet = function (game, scale, parentBody, orbitRadius, orbitSpeed, spinSpeed) {
+rocket.Planet = function (game, key, mass, scale, parentBody, orbitRadius, orbitSpeed, spinSpeed) {
 
     var sprite = game.add.sprite(
         parentBody.x + orbitRadius,
         parentBody.y,
-        'red'
+        key
     );
 
     sprite.scale.setTo(scale, scale);
@@ -19,6 +19,7 @@ rocket.Planet = function (game, scale, parentBody, orbitRadius, orbitSpeed, spin
     body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
     body.collides(game.physics.p2.collisionGroups[0]);
 
+    this.mass = mass;
     this.orbitAngle = 0;
     this.orbitRadius = orbitRadius;
     this.orbitSpeed = orbitSpeed;
@@ -30,7 +31,8 @@ rocket.Planet = function (game, scale, parentBody, orbitRadius, orbitSpeed, spin
 };
 
 rocket.Planet.preload = function (game) {
-    game.load.image('red', 'sprites/bodies/moon.png');
+    game.load.image('orange', 'sprites/bodies/orange.png');
+    game.load.image('moon', 'sprites/bodies/moon.png');
 };
 
 rocket.Planet.prototype.update = function () {
@@ -39,4 +41,13 @@ rocket.Planet.prototype.update = function () {
     this.body.y = this.parentBody.y - Math.sin(this.orbitAngle) * this.orbitRadius;
 
     this.body.rotation += this.spinSpeed;
+
+    var toRocket = new Phaser.Point(
+        this.game.rocket.body.x - this.body.x,
+        this.game.rocket.body.y - this.body.y
+    );
+    var g = 9.8 * (this.mass * 1.0 ) / toRocket.getMagnitudeSq();     // "1.0" is ship mass
+    var force = toRocket.setMagnitude(g);
+    this.game.rocket.body.force.x -= force.x;
+    this.game.rocket.body.force.y -= force.y;
 };
