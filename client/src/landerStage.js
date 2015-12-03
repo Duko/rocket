@@ -24,8 +24,9 @@ rocket.LanderStage.prototype.create = function() {
     this.physics.p2.createCollisionGroup();
 
     // add actors
-    var sun = new rocket.Sun(this, {
-        mass: 1000000000
+    var sun = new rocket.Planet(this, {
+        key: 'sun',
+        mass: 10000000000000
     });
 
     var planet = new rocket.Planet(this, {

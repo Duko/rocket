@@ -10,8 +10,8 @@ rocket.Planet = function (game, config) {
         spinSpeed = config.spinSpeed || 0.0;
 
     var sprite = game.add.sprite(
-        parentBody.x + orbitRadius,
-        parentBody.y,
+        parentBody ? parentBody.x + orbitRadius : 0,
+        parentBody ? parentBody.y : 0,
         key
     );
 
@@ -43,9 +43,12 @@ rocket.Planet.preload = function (game) {
 };
 
 rocket.Planet.prototype.update = function () {
-    this.orbitAngle += this.orbitSpeed % (Math.PI*2);
-    this.body.x = this.parentBody.x + Math.cos(this.orbitAngle) * this.orbitRadius;
-    this.body.y = this.parentBody.y - Math.sin(this.orbitAngle) * this.orbitRadius;
+
+    if (this.parentBody) {
+        this.orbitAngle += this.orbitSpeed % (Math.PI*2);
+        this.body.x = this.parentBody.x + Math.cos(this.orbitAngle) * this.orbitRadius;
+        this.body.y = this.parentBody.y - Math.sin(this.orbitAngle) * this.orbitRadius;
+    }
 
     this.body.rotation += this.spinSpeed;
 
