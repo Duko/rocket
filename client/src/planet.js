@@ -11,8 +11,8 @@ astro.Planet = function (game, config) {
         atmoRadius = config.atmoRadius || 0;
 
     var sprite = game.add.sprite(
-        parentBody ? parentBody.x + orbitRadius : 0,
-        parentBody ? parentBody.y : 0,
+        parentBody ? parentBody.x + orbitRadius : game.world.width/2,
+        parentBody ? parentBody.y : game.world.height/2,
         key
     );
 

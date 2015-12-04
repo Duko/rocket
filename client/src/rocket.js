@@ -35,7 +35,7 @@ astro.Rocket = function (game, config) {
         //particle.body.collides(game.physics.p2.collisionGroups[0]);
     }
 
-    var sprite = game.add.sprite(0, 2000, 'rocket');
+    var sprite = game.add.sprite(game.world.width/2, (game.world.height /2) + 5000, 'rocket');
 
     game.physics.p2.enable(sprite, true);
     var body = sprite.body;
@@ -66,6 +66,13 @@ astro.Rocket.preload = function (game) {
     game.load.image('fire2', 'sprites/particles/flame2.png');
     game.load.image('smoke', 'sprites/particles/smoke.png');
 };
+
+SmokeParticle = function (game, x, y) {
+    Phaser.Particle.call(this, game, x, y, game.cache.getBitmapData('particleShade'));
+};
+
+SmokeParticle.prototype = Object.create(Phaser.Particle.prototype);
+SmokeParticle.prototype.constructor = SmokeParticle;
 
 astro.Rocket.prototype.update = function () {
     var game = this.game,

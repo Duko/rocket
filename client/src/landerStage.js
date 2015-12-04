@@ -4,6 +4,7 @@ astro.LanderStage = function(game) {
     this.game = game;
     this.worldScale = 1;
     this.debugSprite = null;
+    game.time.advancedTiming = true;
 };
 
 astro.LanderStage.prototype.preload = function() {
@@ -18,7 +19,7 @@ astro.LanderStage.prototype.create = function() {
     var starfield = this.game.add.tileSprite(0, 0, 20000, 20000, 'bg_stars');
     starfield.fixedToCamera = true;
     // setup stage
-    this.world.setBounds(-10000, -10000, 20000, 20000);
+    this.world.setBounds(-1000, -1000, 500000, 500000);
     this.physics.startSystem(Phaser.Physics.P2JS);
     this.physics.p2.restitution = 0.0;
     this.physics.p2.createCollisionGroup();
@@ -175,6 +176,7 @@ astro.LanderStage.prototype.render = function() {
     this.game.debug.text("TH: " + this.rocket.thrust + " On: " + this.rocket.thrustOn, 100, 380 );
     this.game.debug.text("VX: " + this.rocket.body.velocity.x, 100, 400 );
     this.game.debug.text("VY: " + this.rocket.body.velocity.y, 100, 420 );
+    this.game.debug.text(game.time.fps, this.game.width - 30, 20);
 };
 
 astro.LanderStage.prototype.enableDebug = function() {
