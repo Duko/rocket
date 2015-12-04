@@ -31,7 +31,7 @@ astro.LanderStage.prototype.create = function() {
     });
 
     var planet0 = new astro.Planet(this, {
-        key: 'orange',
+        key: 'black',
         mass: 3600000,
         scale: 0.6,
         parentBody: sun.body,
@@ -42,7 +42,7 @@ astro.LanderStage.prototype.create = function() {
 
     var planet1 = new astro.Planet(this, {
         key: 'orange',
-        mass: 4500000,
+        mass: 4200000,
         scale: 0.7,
         parentBody: sun.body,
         orbitRadius: 8000,
@@ -62,7 +62,7 @@ astro.LanderStage.prototype.create = function() {
     });
 
     var planet2 = new astro.Planet(this, {
-        key: 'orange',
+        key: 'purple',
         mass: 16000000,
         scale: 1.5,
         parentBody: sun.body,
@@ -91,7 +91,17 @@ astro.LanderStage.prototype.create = function() {
         spinSpeed: -0.0001
     });
 
-    planets = this.planets = [sun, planet0, planet1, planet2, moonA, moon2A, moon2B];
+    var planet3 = new astro.Planet(this, {
+        key: 'green',
+        mass: 46000000,
+        scale: 2.5,
+        parentBody: sun.body,
+        orbitRadius: 26000,
+        orbitSpeed: -0.0000001,
+        spinSpeed: 0.00005
+    });
+
+    planets = this.planets = [sun, planet0, planet1, planet2, planet3, moonA, moon2A, moon2B];
 
     // Add rocket
     var r = new astro.Rocket(this, {
