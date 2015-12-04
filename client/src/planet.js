@@ -43,6 +43,9 @@ astro.Planet.preload = function (game) {
     game.load.image('orange', 'sprites/bodies/orange.png');
     game.load.image('moon', 'sprites/bodies/moon.png');
     game.load.image('sun', 'sprites/bodies/sun.png');
+    game.load.image('black', 'sprites/bodies/black.png');
+    game.load.image('purple', 'sprites/bodies/purple.png');
+    game.load.image('green', 'sprites/bodies/green.png');
 };
 
 astro.Planet.prototype.update = function () {
