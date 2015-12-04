@@ -37,8 +37,13 @@ rocket.Rocket = function (game, config) {
 
     var sprite = game.add.sprite(0, 2000, 'rocket');
 
-    game.physics.p2.enable(sprite);
+    game.physics.p2.enable(sprite, true);
     var body = sprite.body;
+
+    var w = sprite.width, h = sprite.height;
+    body.clearShapes();
+    body.addPolygon({}, [0,-h/2,  w/2,h/2, 0,0, -w/2,h/2]);
+
     body.collideWorldBounds = false;
     body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
     body.collides(game.physics.p2.collisionGroups[0]);
