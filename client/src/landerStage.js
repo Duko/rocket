@@ -37,7 +37,7 @@ astro.LanderStage.prototype.create = function() {
         parentBody: sun.body,
         orbitRadius: 3000,
         orbitSpeed: 0.00001,
-        spinSpeed: 0.0001,
+        spinSpeed: 0.0003,
         atmoRadius: 600
     });
 
@@ -48,18 +48,18 @@ astro.LanderStage.prototype.create = function() {
         parentBody: sun.body,
         orbitRadius: 8000,
         orbitSpeed: -0.00001,
-        spinSpeed: 0.001,
+        spinSpeed: 0.0003,
         atmoRadius: 700
     });
 
     var moonA = new astro.Planet(this, {
         key: 'moon',
-        mass: 1400000,
+        mass: 1000000,
         scale: 0.35,
         parentBody: planet1.body,
         orbitRadius: 2000,
         orbitSpeed: 0.0001,
-        spinSpeed: 0.001,
+        spinSpeed: 0.0001,
         atmoRadius: 350
     });
 
@@ -70,7 +70,7 @@ astro.LanderStage.prototype.create = function() {
         parentBody: sun.body,
         orbitRadius: 18000,
         orbitSpeed: -0.000001,
-        spinSpeed: 0.00005,
+        spinSpeed: 0.00009,
         atmoRadius: 1500
     });
 
@@ -80,8 +80,8 @@ astro.LanderStage.prototype.create = function() {
         scale: 0.5,
         parentBody: planet2.body,
         orbitRadius: 3000,
-        orbitSpeed: 0.00002,
-        spinSpeed: 0.00001,
+        orbitSpeed: 0.00004,
+        spinSpeed: 0.00015,
         atmoRadius: 500
     });
 
