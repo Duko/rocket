@@ -2,6 +2,39 @@ var rocket = rocket || {};
 
 rocket.Rocket = function (game, config) {
     var maxThrust = config.maxThrust || 0;
+
+    fireEmitter = game.add.emitter(0, 0, 100);
+    smokeEmitter = game.add.emitter(0, 0, 100);
+
+    smokeEmitter.enableBody = true;
+
+    smokeEmitter.physicsBodyType = Phaser.Physics.P2JS;
+
+    smokeEmitter.enableBodyDebug = true;
+
+    fireEmitter.makeParticles( [ 'fire0', 'fire1', 'fire2' ], undefined, undefined, true );
+    smokeEmitter.makeParticles( [ 'smoke' ] );
+
+    smokeEmitter.setAlpha(0.1, 1, 3000);
+    smokeEmitter.setScale(0.1, 1, 0.1, 1, 6000, Phaser.Easing.Quintic.Out);
+
+    console.log(smokeEmitter);
+
+    //setAll('body.setCollisionGroup', game.physics.p2.collisionGroups[0], false, false, 0, true);
+    //setAll('body.setCollisionGroup', game.physics.p2.collisionGroups[0], false, false, 0, true);
+    //
+    //smokeEmitter.Group.forEach(function(particle) {
+    //    particle.sprite.body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
+    //    particle.sprite.body.collides(game.physics.p2.collisionGroups[0]);
+    //}, this)
+
+    for (var i = 0; i < smokeEmitter.children.length; i++) {
+        var particle = smokeEmitter.children[i];
+        console.log(particle);
+        //particle.body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
+        //particle.body.collides(game.physics.p2.collisionGroups[0]);
+    }
+
     var sprite = game.add.sprite(0, 2000, 'rocket');
 
     game.physics.p2.enable(sprite);
@@ -9,12 +42,6 @@ rocket.Rocket = function (game, config) {
     body.collideWorldBounds = false;
     body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
     body.collides(game.physics.p2.collisionGroups[0]);
-
-    fireEmitter = game.add.emitter(sprite.x, sprite.y, 100);
-    smokeEmitter = game.add.emitter(sprite.x, sprite.y, 100);
-
-    fireEmitter.makeParticles( [ 'fire0', 'fire1', 'fire2' ] );
-    smokeEmitter.makeParticles( [ 'smoke' ] );
 
     this.game = game;
     this.sprite = sprite;
@@ -42,11 +69,25 @@ rocket.Rocket.prototype.update = function () {
         fireEmitter = this.fireEmitter,
         smokeEmitter = this.smokeEmitter;
 
-    fireEmitter.x = sprite.x + Math.cos(sprite.rotation) * 0 - Math.sin(sprite.rotation) * 50;
-    fireEmitter.y = sprite.y + Math.sin(sprite.rotation) * 0 + Math.cos(sprite.rotation) * 50;
 
-    smokeEmitter.x = sprite.x + Math.cos(sprite.rotation) * 0 - Math.sin(sprite.rotation) * 50;
-    smokeEmitter.y = sprite.y + Math.sin(sprite.rotation) * 0 + Math.cos(sprite.rotation) * 50;
+    fireEmitter.setRotation(sprite.rotation/(2*Math.PI), sprite.rotation);
+
+    //console.log(Math.abs(sprite.rotation/(2*Math.PI)*360)%360);
+
+    fireEmitter.emitX = sprite.x + 0 - Math.sin(sprite.rotation) * 40;
+    fireEmitter.emitY = sprite.y + 0 + Math.cos(sprite.rotation) * 40;
+
+    smokeEmitter.x = sprite.x - Math.sin(sprite.rotation) * 40;
+    smokeEmitter.y = sprite.y + Math.cos(sprite.rotation) * 40;
+
+    var px = body.velocity.x;
+    var py = body.velocity.y;
+
+    px *= -1;
+    py *= -1;
+
+    fireEmitter.minParticleSpeed.set(px, py);
+    fireEmitter.maxParticleSpeed.set(px, py);
 
     // Thrust Start
     if (game.input.keyboard.isDown(Phaser.Keyboard.X)) {
@@ -62,7 +103,7 @@ rocket.Rocket.prototype.update = function () {
     }
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-        fireEmitter.start(true, 1000, null, this.thrust/this.maxThrust);
+        fireEmitter.start(true, 100, null, this.thrust/this.maxThrust);
         smokeEmitter.start(true, 1000, null, this.thrust/this.maxThrust);
         body.thrust(this.thrust);
         this.thrustOn = true;
