@@ -23,7 +23,8 @@ rocket.LanderStage.prototype.create = function() {
     this.physics.p2.restitution = 0.0;
     this.physics.p2.createCollisionGroup();
 
-    // add actors
+    // add "planets"
+
     var sun = new rocket.Planet(this, {
         key: 'sun',
         mass: 10000000
@@ -39,27 +40,57 @@ rocket.LanderStage.prototype.create = function() {
         spinSpeed: 0.001
     });
 
-    var moon = new rocket.Planet(this, {
+    var moonA = new rocket.Planet(this, {
         key: 'moon',
         mass: 2500000,
         scale: 0.5,
         parentBody: planet.body,
-        orbitRadius: 3000,
+        orbitRadius: 1500,
         orbitSpeed: 0.0001,
         spinSpeed: 0.001
     });
 
+    var planet2 = new rocket.Planet(this, {
+        key: 'orange',
+        mass: 4500000,
+        scale: 0.7,
+        parentBody: sun.body,
+        orbitRadius: 12000,
+        orbitSpeed: -0.00001,
+        spinSpeed: 0.001
+    });
+
+    var moon2A = new rocket.Planet(this, {
+        key: 'moon',
+        mass: 500000,
+        scale: 0.2,
+        parentBody: planet2.body,
+        orbitRadius: 1000,
+        orbitSpeed: 0.0001,
+        spinSpeed: 0.001
+    });
+
+    var moon2B = new rocket.Planet(this, {
+        key: 'moon',
+        mass: 500000,
+        scale: 0.2,
+        parentBody: planet2.body,
+        orbitRadius: 1500,
+        orbitSpeed: 0.001,
+        spinSpeed: 0.01
+    });
+
+    planets = this.planets = [sun, planet, planet2, moonA, moon2A, moon2B];
+
+    // Add rocket
     var r = new rocket.Rocket(this, {
         maxThrust: 160
     });
     this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_LOCKON);
     this.game.camera.roundPx = false;
 
-    this.sun = sun;
     this.starfield = starfield;
-    this.planet = planet;
-    this.moon = moon;
-    this.rocket = r;
+    player = this.rocket = r;
 
     this.enableDebug();
 };
@@ -90,9 +121,7 @@ rocket.LanderStage.prototype.update = function() {
     // set our world scale as needed
     game.world.scale.set(this.worldScale);
 
-    this.sun.update();
-    this.planet.update();
-    this.moon.update();
+    this.planets.forEach(function (p) { p.update(); });
     this.rocket.update();
 
     if (!this.game.camera.atLimit.x)
@@ -107,12 +136,13 @@ rocket.LanderStage.prototype.update = function() {
 };
 
 rocket.LanderStage.prototype.render = function() {
+    var game = this.game;
+
     if (this.debugSprite != null) {
         this.game.debug.spriteCoords(this.debugSprite, 32, this.game.height - 50);
     }
     this.game.debug.body(this.rocket.body);
-    this.game.debug.body(this.planet.body);
-    this.game.debug.body(this.moon.body);
+    this.planets.forEach(function (p) { game.debug.body(p.body); });
     this.game.debug.cameraInfo(this.game.camera, 32, 32);
 
     this.game.debug.text("TH: " + this.rocket.thrust + " On: " + this.rocket.thrustOn, 100, 380 );
@@ -121,9 +151,9 @@ rocket.LanderStage.prototype.render = function() {
 };
 
 rocket.LanderStage.prototype.enableDebug = function() {
-    this.addDebugToObject(this.sun);
-    this.addDebugToObject(this.planet);
-    this.addDebugToObject(this.moon);
+    var stage = this;
+
+    this.planets.forEach(function (p) { stage.addDebugToObject(p); });
     this.addDebugToObject(this.rocket);
 };
 
