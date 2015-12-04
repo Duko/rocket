@@ -8,7 +8,7 @@ astro.Planet = function (game, config) {
         orbitRadius = config.orbitRadius || 0.0,
         orbitSpeed = config.orbitSpeed || 0.0,
         spinSpeed = config.spinSpeed || 0.0;
-        atmo = config.atmo || 100;
+        atmoRadius = config.atmoRadius || 0;
 
     var sprite = game.add.sprite(
         parentBody ? parentBody.x + orbitRadius : 0,
@@ -22,7 +22,8 @@ astro.Planet = function (game, config) {
     var body = sprite.body;
     body.setCircle((sprite.width - 400*scale) / 2, 0, 0, 0);
     body.collideWorldBounds = false;
-    body.static = true;
+    body.mass = mass;
+    body.dynamic = true;
 
     body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
     body.collides(game.physics.p2.collisionGroups[0]);
@@ -37,6 +38,7 @@ astro.Planet = function (game, config) {
     this.body = body;
     this.parentBody = parentBody;
     this.scale = scale;
+    this.atmoRadius = atmoRadius;
 };
 
 astro.Planet.preload = function (game) {
@@ -46,33 +48,42 @@ astro.Planet.preload = function (game) {
 };
 
 astro.Planet.prototype.update = function () {
+    var rocketBody = this.game.rocket.body,
+        body = this.body,
+        parentBody = this.parentBody,
+        orbitSpeed = this.orbitSpeed,
+        orbitAngle = this.orbitAngle,
+        orbitRadius = this.orbitRadius,
+        spinSpeed = this.spinSpeed,
+        atmoRadius = this.atmoRadius;
 
-    if (this.parentBody) {
-        this.orbitAngle += this.orbitSpeed % (Math.PI*2);
-        this.body.x = this.parentBody.x + Math.cos(this.orbitAngle) * this.orbitRadius;
-        this.body.y = this.parentBody.y - Math.sin(this.orbitAngle) * this.orbitRadius;
+    // Orbit parent and spin
+    if (parentBody) {
+        orbitAngle += orbitSpeed % (Math.PI*2);
+        body.x = parentBody.x + Math.cos(orbitAngle) * orbitRadius;
+        body.y = parentBody.y - Math.sin(orbitAngle) * orbitRadius;
     }
-
-    this.body.rotation += this.spinSpeed;
+    body.rotation += spinSpeed;
 
     var toRocket = new Phaser.Point(
-        this.game.rocket.body.x - this.body.x,
-        this.game.rocket.body.y - this.body.y
+        rocketBody.x - body.x,
+        rocketBody.y - body.y
     );
 
-    var g = 9.8 * (this.mass * 1.0 ) / toRocket.getMagnitudeSq();     // "1.0" is ship mass
+    // Apply gravity to rocket.
+    var g = 9.8 * (this.mass * rocketBody.mass) / toRocket.getMagnitudeSq();
     var force = toRocket.clone().setMagnitude(g);
-    this.game.rocket.body.force.x -= force.x;
-    this.game.rocket.body.force.y -= force.y;
+    rocketBody.force.x -= force.x;
+    rocketBody.force.y -= force.y;
 
-    var r = (this.sprite.width - 400*this.scale) / 2;
-    var surfaceSpeed = this.spinSpeed * r;
-    var effect = 1.0 / Math.max(1, toRocket.getMagnitude() - r - atmo);
-    if (effect < 0.01)
-        effect = 0;
-    var spinDrag = toRocket.clone().perp().setMagnitude(surfaceSpeed * effect);
+    // Apply "atmo spin" to rocket.
+    var spinSpeedAtRocket = spinSpeed * toRocket.getMagnitude();
+    var spinDistanceScale = 1 / Math.max(1, (toRocket.getMagnitude() - atmoRadius) * 0.05);
+    if (spinDistanceScale < 0.01)
+        spinDistanceScale = 0;
+    var spinVelocityAtRocket = toRocket.clone().perp().setMagnitude(spinSpeedAtRocket * spinDistanceScale);
 
-    this.game.rocket.body.x += spinDrag.x;
-    this.game.rocket.body.y += spinDrag.y;
-    this.game.rocket.body.roation += this.spinSpeed * effect;
+    rocketBody.x += spinVelocityAtRocket.x;
+    rocketBody.y += spinVelocityAtRocket.y;
+    rocketBody.rotation += this.spinSpeed * spinDistanceScale;
 };
