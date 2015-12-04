@@ -42,7 +42,7 @@ astro.LanderStage.prototype.create = function() {
 
     var planet1 = new astro.Planet(this, {
         key: 'orange',
-        mass: 4500000,
+        mass: 4200000,
         scale: 0.7,
         parentBody: sun.body,
         orbitRadius: 8000,
