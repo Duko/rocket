@@ -47,6 +47,7 @@ astro.Rocket = function (game, config) {
     body.collideWorldBounds = false;
     body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
     body.collides(game.physics.p2.collisionGroups[0]);
+    body.mass = 1;
 
     this.game = game;
     this.sprite = sprite;
@@ -73,7 +74,6 @@ astro.Rocket.prototype.update = function () {
         sprite = this.sprite,
         fireEmitter = this.fireEmitter,
         smokeEmitter = this.smokeEmitter;
-
 
     fireEmitter.setRotation(sprite.rotation/(2*Math.PI), sprite.rotation);
 
