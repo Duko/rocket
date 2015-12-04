@@ -37,7 +37,8 @@ astro.LanderStage.prototype.create = function() {
         parentBody: sun.body,
         orbitRadius: 3000,
         orbitSpeed: 0.00001,
-        spinSpeed: 0.0001
+        spinSpeed: 0.0001,
+        atmoRadius: 600
     });
 
     var planet1 = new astro.Planet(this, {
@@ -48,7 +49,7 @@ astro.LanderStage.prototype.create = function() {
         orbitRadius: 8000,
         orbitSpeed: -0.00001,
         spinSpeed: 0.001,
-        atmoRadius: 800
+        atmoRadius: 700
     });
 
     var moonA = new astro.Planet(this, {
@@ -58,7 +59,8 @@ astro.LanderStage.prototype.create = function() {
         parentBody: planet1.body,
         orbitRadius: 2000,
         orbitSpeed: 0.0001,
-        spinSpeed: 0.001
+        spinSpeed: 0.001,
+        atmoRadius: 350
     });
 
     var planet2 = new astro.Planet(this, {
@@ -68,7 +70,8 @@ astro.LanderStage.prototype.create = function() {
         parentBody: sun.body,
         orbitRadius: 18000,
         orbitSpeed: -0.000001,
-        spinSpeed: 0.00005
+        spinSpeed: 0.00005,
+        atmoRadius: 1500
     });
 
     var moon2A = new astro.Planet(this, {
@@ -78,7 +81,8 @@ astro.LanderStage.prototype.create = function() {
         parentBody: planet2.body,
         orbitRadius: 3000,
         orbitSpeed: 0.00002,
-        spinSpeed: 0.00001
+        spinSpeed: 0.00001,
+        atmoRadius: 500
     });
 
     var moon2B = new astro.Planet(this, {
@@ -88,7 +92,8 @@ astro.LanderStage.prototype.create = function() {
         parentBody: planet2.body,
         orbitRadius: 4500,
         orbitSpeed: -0.00001,
-        spinSpeed: -0.0001
+        spinSpeed: -0.0001,
+        atmoRadius: 400
     });
 
     var planet3 = new astro.Planet(this, {
@@ -98,7 +103,8 @@ astro.LanderStage.prototype.create = function() {
         parentBody: sun.body,
         orbitRadius: 26000,
         orbitSpeed: -0.0000001,
-        spinSpeed: 0.00005
+        spinSpeed: 0.00005,
+        atmoRadius: 2500
     });
 
     planets = this.planets = [sun, planet0, planet1, planet2, planet3, moonA, moon2A, moon2B];
