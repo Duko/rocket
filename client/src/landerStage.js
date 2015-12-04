@@ -47,7 +47,8 @@ astro.LanderStage.prototype.create = function() {
         parentBody: sun.body,
         orbitRadius: 8000,
         orbitSpeed: -0.00001,
-        spinSpeed: 0.001
+        spinSpeed: 0.001,
+        atmoRadius: 800
     });
 
     var moonA = new astro.Planet(this, {
