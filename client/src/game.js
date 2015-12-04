@@ -1,6 +1,6 @@
-var rocket = rocket || {};
+var astro = astro || {};
 
-rocket.Game = function(divName) {
+astro.Game = function(divName) {
     this.divName = divName;
     this.config = {
         preload: this.preload,
@@ -10,26 +10,26 @@ rocket.Game = function(divName) {
     };
 };
 
-rocket.Game.prototype.run = function() {
+astro.Game.prototype.run = function() {
     this.game = new Phaser.Game(1224, 768, Phaser.AUTO, this.divName, this.config);
 };
 
-rocket.Game.prototype.preload = function() {
+astro.Game.prototype.preload = function() {
 
 };
 
-rocket.Game.prototype.create = function() {
+astro.Game.prototype.create = function() {
 
     var game = this.game;
 
-    game.state.add('menu', new rocket.MenuStage());
-    game.state.add('lander', new rocket.LanderStage(game));
+    game.state.add('menu', new astro.MenuStage());
+    game.state.add('lander', new astro.LanderStage(game));
 
     game.state.start('lander');
 };
 
-rocket.Game.prototype.update = function() {
+astro.Game.prototype.update = function() {
 };
 
-rocket.Game.prototype.render = function() {
+astro.Game.prototype.render = function() {
 };

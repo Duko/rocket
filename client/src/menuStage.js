@@ -1,17 +1,17 @@
-var rocket = rocket || {};
+var astro = astro || {};
 
-rocket.MenuStage = function() {
+astro.MenuStage = function() {
 };
 
-rocket.MenuStage.prototype.preload = function() {
+astro.MenuStage.prototype.preload = function() {
     console.log('menustage preload');
 
 };
 
-rocket.MenuStage.prototype.create = function() {
+astro.MenuStage.prototype.create = function() {
     console.log('menustage create');
 
-    var titleText = rocket.createText(this, 35, "ASTRONOMER");
+    var titleText = astro.createText(this, 35, "ASTRONOMER");
     titleText.x = this.world.centerX;
     titleText.y = 100;
     titleText.anchor.setTo(.5,.5);
@@ -21,7 +21,7 @@ rocket.MenuStage.prototype.create = function() {
 
     this.menu = menu;
 
-    var startText = rocket.createText(this, 20, "START GAME");
+    var startText = astro.createText(this, 20, "START GAME");
     startText.x = this.world.centerX;
     startText.y = 0;
     startText.inputEnabled = true;
@@ -35,11 +35,11 @@ rocket.MenuStage.prototype.create = function() {
 
 };
 
-rocket.MenuStage.prototype.update = function() {
+astro.MenuStage.prototype.update = function() {
     console.log('menustage update');
 };
 
-rocket.MenuStage.prototype.startGameClick = function () {
+astro.MenuStage.prototype.startGameClick = function () {
     console.log("clicked");
     this.state.start('lander');
 };

@@ -1,9 +1,9 @@
 /**
  * Created by Duko on 02-12-2015.
  */
-var rocket = rocket || {};
+var astro = astro || {};
 
-rocket.createText = function(game, size, string) {
+astro.createText = function(game, size, string) {
     var text = game.add.text(0, 0, string);
 
     text.font = 'Roboto Mono';

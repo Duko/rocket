@@ -1,6 +1,6 @@
-var rocket = rocket || {};
+var astro = astro || {};
 
-rocket.Planet = function (game, config) {
+astro.Planet = function (game, config) {
     var key = config.key || 'moon',
         mass = config.mass || 1000000,
         scale = config.scale || 1.0,
@@ -39,13 +39,13 @@ rocket.Planet = function (game, config) {
     this.scale = scale;
 };
 
-rocket.Planet.preload = function (game) {
+astro.Planet.preload = function (game) {
     game.load.image('orange', 'sprites/bodies/orange.png');
     game.load.image('moon', 'sprites/bodies/moon.png');
     game.load.image('sun', 'sprites/bodies/sun.png');
 };
 
-rocket.Planet.prototype.update = function () {
+astro.Planet.prototype.update = function () {
 
     if (this.parentBody) {
         this.orbitAngle += this.orbitSpeed % (Math.PI*2);

@@ -1,6 +1,6 @@
-var rocket = rocket || {};
+var astro = astro || {};
 
-rocket.Rocket = function (game, config) {
+astro.Rocket = function (game, config) {
     var maxThrust = config.maxThrust || 0;
 
     fireEmitter = game.add.emitter(0, 0, 100);
@@ -58,7 +58,7 @@ rocket.Rocket = function (game, config) {
     this.smokeEmitter = smokeEmitter;
 };
 
-rocket.Rocket.preload = function (game) {
+astro.Rocket.preload = function (game) {
     game.load.image('rocket', 'sprites/rockets/s1.png');
     game.load.image('fire0', 'sprites/particles/flame0.png');
     game.load.image('fire1', 'sprites/particles/flame1.png');
@@ -66,7 +66,7 @@ rocket.Rocket.preload = function (game) {
     game.load.image('smoke', 'sprites/particles/smoke.png');
 };
 
-rocket.Rocket.prototype.update = function () {
+astro.Rocket.prototype.update = function () {
     var game = this.game,
         body = this.body,
         cursors = game.input.keyboard.createCursorKeys(),
@@ -126,6 +126,6 @@ rocket.Rocket.prototype.update = function () {
     }
 };
 
-rocket.Rocket.prototype.postUpdate = function () {
+astro.Rocket.prototype.postUpdate = function () {
 
 };
