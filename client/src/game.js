@@ -25,7 +25,7 @@ rocket.Game.prototype.create = function() {
     game.state.add('menu', new rocket.MenuStage());
     game.state.add('lander', new rocket.LanderStage(game));
 
-    game.state.start('menu');
+    game.state.start('lander');
 };
 
 rocket.Game.prototype.update = function() {
