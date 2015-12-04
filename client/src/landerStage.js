@@ -30,61 +30,71 @@ rocket.LanderStage.prototype.create = function() {
         mass: 10000000
     });
 
-    var planet = new rocket.Planet(this, {
+    var planet0 = new rocket.Planet(this, {
+        key: 'orange',
+        mass: 3600000,
+        scale: 0.6,
+        parentBody: sun.body,
+        orbitRadius: 3000,
+        orbitSpeed: 0.00001,
+        spinSpeed: 0.0001
+    });
+
+    var planet1 = new rocket.Planet(this, {
         key: 'orange',
         mass: 4500000,
         scale: 0.7,
         parentBody: sun.body,
-        orbitRadius: 6000,
+        orbitRadius: 8000,
         orbitSpeed: -0.00001,
         spinSpeed: 0.001
     });
 
     var moonA = new rocket.Planet(this, {
         key: 'moon',
-        mass: 2500000,
-        scale: 0.5,
-        parentBody: planet.body,
-        orbitRadius: 1500,
+        mass: 1400000,
+        scale: 0.35,
+        parentBody: planet1.body,
+        orbitRadius: 2000,
         orbitSpeed: 0.0001,
         spinSpeed: 0.001
     });
 
     var planet2 = new rocket.Planet(this, {
         key: 'orange',
-        mass: 4500000,
-        scale: 0.7,
+        mass: 16000000,
+        scale: 1.5,
         parentBody: sun.body,
-        orbitRadius: 12000,
-        orbitSpeed: -0.00001,
-        spinSpeed: 0.001
+        orbitRadius: 18000,
+        orbitSpeed: -0.000001,
+        spinSpeed: 0.00005
     });
 
     var moon2A = new rocket.Planet(this, {
         key: 'moon',
-        mass: 500000,
-        scale: 0.2,
+        mass: 1400000,
+        scale: 0.5,
         parentBody: planet2.body,
-        orbitRadius: 1000,
-        orbitSpeed: 0.0001,
-        spinSpeed: 0.001
+        orbitRadius: 3000,
+        orbitSpeed: 0.00002,
+        spinSpeed: 0.00001
     });
 
     var moon2B = new rocket.Planet(this, {
         key: 'moon',
-        mass: 500000,
-        scale: 0.2,
+        mass: 1200000,
+        scale: 0.4,
         parentBody: planet2.body,
-        orbitRadius: 1500,
-        orbitSpeed: 0.001,
-        spinSpeed: 0.01
+        orbitRadius: 4500,
+        orbitSpeed: -0.00001,
+        spinSpeed: -0.0001
     });
 
-    planets = this.planets = [sun, planet, planet2, moonA, moon2A, moon2B];
+    planets = this.planets = [sun, planet0, planet1, planet2, moonA, moon2A, moon2B];
 
     // Add rocket
     var r = new rocket.Rocket(this, {
-        maxThrust: 160
+        maxThrust: 140
     });
     this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_LOCKON);
     this.game.camera.roundPx = false;

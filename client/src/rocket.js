@@ -108,8 +108,8 @@ rocket.Rocket.prototype.update = function () {
     }
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-        fireEmitter.start(true, 100, null, this.thrust/this.maxThrust);
-        smokeEmitter.start(true, 1000, null, this.thrust/this.maxThrust);
+        fireEmitter.start(true, 80, null, this.thrust/this.maxThrust);
+        smokeEmitter.start(true, 700, null, this.thrust/this.maxThrust);
         body.thrust(this.thrust);
         this.thrustOn = true;
     } else {
