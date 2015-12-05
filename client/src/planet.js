@@ -10,6 +10,15 @@ astro.Planet = function (game, config) {
         spinSpeed = config.spinSpeed || 0.0;
         atmoRadius = config.atmoRadius || 0;
 
+    console.log(game.showDebug);
+
+    if (parentBody) {
+        var debugOrbit = new Phaser.Circle(parentBody.x, parentBody.y, orbitRadius*2);
+        var graphics = game.add.graphics(0, 0);
+        graphics.lineStyle(1, 0x00ff00, 1);
+        graphics.drawCircle(debugOrbit.x, debugOrbit.y, debugOrbit.diameter);
+    }
+
     var sprite = game.add.sprite(
         parentBody ? parentBody.x + orbitRadius : game.world.width/2,
         parentBody ? parentBody.y : game.world.height/2,
