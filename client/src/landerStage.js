@@ -113,13 +113,46 @@ astro.LanderStage.prototype.create = function() {
         mass: 33000000,
         scale: 2.0,
         parentBody: sun.body,
-        orbitRadius: 42000,
+        orbitRadius: 45000,
         orbitSpeed: -0.0000005,
         spinSpeed: 0.00005,
         atmoRadius: 2500
     });
 
-    planets = this.planets = [sun, planet0, planet1, planet2, planet3, planet4, moonA, moon2A, moon2B];
+    var moon4A = new astro.Planet(this, {
+        key: 'moon',
+        mass: 1400000,
+        scale: 0.55,
+        parentBody: planet4.body,
+        orbitRadius: 4000,
+        orbitSpeed: 0.00008,
+        spinSpeed: 0.00015,
+        atmoRadius: 500
+    });
+
+    var moon4B = new astro.Planet(this, {
+        key: 'moon',
+        mass: 1200000,
+        scale: 0.4,
+        parentBody: planet4.body,
+        orbitRadius: 5500,
+        orbitSpeed: -0.0001,
+        spinSpeed: -0.0001,
+        atmoRadius: 400
+    });
+
+    var moon4C = new astro.Planet(this, {
+        key: 'moon',
+        mass: 1450000,
+        scale: 0.58,
+        parentBody: planet4.body,
+        orbitRadius: 9000,
+        orbitSpeed: 0.00006,
+        spinSpeed: 0.00015,
+        atmoRadius: 500
+    });
+
+    planets = this.planets = [sun, planet0, planet1, planet2, planet3, planet4, moonA, moon2A, moon2B, moon4A, moon4B, moon4C];
 
     // Add rocket
     var r = new astro.Rocket(this, {
