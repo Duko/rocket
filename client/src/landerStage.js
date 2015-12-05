@@ -37,7 +37,7 @@ astro.LanderStage.prototype.create = function() {
         scale: 0.6,
         parentBody: sun.body,
         orbitRadius: 3000,
-        orbitSpeed: 0.00001,
+        orbitSpeed: 0.00008,
         spinSpeed: 0.0003,
         atmoRadius: 600
     });
@@ -59,7 +59,7 @@ astro.LanderStage.prototype.create = function() {
         scale: 0.35,
         parentBody: planet1.body,
         orbitRadius: 2000,
-        orbitSpeed: 0.0001,
+        orbitSpeed: 0.0004,
         spinSpeed: 0.0001,
         atmoRadius: 350
     });
@@ -102,7 +102,7 @@ astro.LanderStage.prototype.create = function() {
         mass: 46000000,
         scale: 2.5,
         parentBody: sun.body,
-        orbitRadius: 26000,
+        orbitRadius: 32000,
         orbitSpeed: -0.0000001,
         spinSpeed: 0.00005,
         atmoRadius: 2500

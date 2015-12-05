@@ -15,7 +15,7 @@ astro.Planet = function (game, config) {
     if (parentBody) {
         var debugOrbit = new Phaser.Circle(parentBody.x, parentBody.y, orbitRadius*2);
         var graphics = game.add.graphics(0, 0);
-        graphics.lineStyle(1, 0x00ff00, 1);
+        graphics.lineStyle(1, 0x2d5575, 0.4);
         graphics.drawCircle(debugOrbit.x, debugOrbit.y, debugOrbit.diameter);
     }
 
