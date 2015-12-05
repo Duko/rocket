@@ -108,7 +108,18 @@ astro.LanderStage.prototype.create = function() {
         atmoRadius: 2500
     });
 
-    planets = this.planets = [sun, planet0, planet1, planet2, planet3, moonA, moon2A, moon2B];
+    var planet4 = new astro.Planet(this, {
+        key: 'blue',
+        mass: 33000000,
+        scale: 2.0,
+        parentBody: sun.body,
+        orbitRadius: 42000,
+        orbitSpeed: -0.0000005,
+        spinSpeed: 0.00005,
+        atmoRadius: 2500
+    });
+
+    planets = this.planets = [sun, planet0, planet1, planet2, planet3, planet4, moonA, moon2A, moon2B];
 
     // Add rocket
     var r = new astro.Rocket(this, {
