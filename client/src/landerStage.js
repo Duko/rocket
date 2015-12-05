@@ -221,6 +221,7 @@ astro.LanderStage.prototype.render = function() {
     this.game.debug.text("VX: " + this.rocket.body.velocity.x, 100, 400 );
     this.game.debug.text("VY: " + this.rocket.body.velocity.y, 100, 420 );
     this.game.debug.text(game.time.fps, this.game.width - 30, 20);
+    this.rocket.render(this);
 };
 
 astro.LanderStage.prototype.enableDebug = function() {
