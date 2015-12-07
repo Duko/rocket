@@ -28,7 +28,7 @@ astro.Rocket = function (game, config) {
 
     var sprite = game.add.sprite(game.world.width/2, (game.world.height /2) + 5000, 'rocket');
 
-    game.physics.p2.enable(sprite, true);
+    game.physics.p2.enable(sprite);
     var body = sprite.body;
 
     var w = sprite.width, h = sprite.height;
