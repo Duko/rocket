@@ -2,27 +2,24 @@ var astro = astro || {};
 
 astro.LanderStage = function(game) {
     this.game = game;
-    this.worldScale = 1;
     this.debugSprite = null;
     game.time.advancedTiming = true;
 };
 
 astro.LanderStage.prototype.preload = function() {
-
-    this.load.image('bg_stars', 'sprites/bg/stars.jpg');
-
     astro.Planet.preload(this);
     astro.Rocket.preload(this);
+    astro.Starfield.preload(this);
 };
 
 astro.LanderStage.prototype.create = function() {
-    var starfield = this.game.add.tileSprite(0, 0, 20000, 20000, 'bg_stars');
-    starfield.fixedToCamera = true;
     // setup stage
     this.world.setBounds(-1000, -1000, 500000, 500000);
     this.physics.startSystem(Phaser.Physics.P2JS);
     this.physics.p2.restitution = 0.0;
     this.physics.p2.createCollisionGroup();
+
+    var starfield = new astro.Starfield(this);
 
     // add "planets"
 
@@ -154,15 +151,15 @@ astro.LanderStage.prototype.create = function() {
 
     planets = this.planets = [sun, planet0, planet1, planet2, planet3, planet4, moonA, moon2A, moon2B, moon4A, moon4B, moon4C];
 
-    // Add rocket
-    var r = new astro.Rocket(this, {
+    // Add rocket and camera following it
+    var rocket = new astro.Rocket(this, {
         maxThrust: 140
     });
-    //this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_LOCKON);
-    this.game.camera.roundPx = false;
+    var rocketCamera = new astro.Camera(this, rocket.body);
 
+    player = this.rocket = rocket;
+    this.rocketCamera = rocketCamera;
     this.starfield = starfield;
-    player = this.rocket = r;
 
     this.enableDebug();
 };
@@ -177,36 +174,10 @@ astro.LanderStage.prototype.addDebugToSprite = function (item) {
 };
 
 astro.LanderStage.prototype.update = function() {
-    var game = this.game;
-
-    // zoom
-    if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-        this.worldScale += 0.007;
-    }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
-        this.worldScale -= 0.007;
-    }
-
-    // set a minimum and maximum scale value
-    this.worldScale = Phaser.Math.clamp(this.worldScale, 0.08, 1.5);
-
-    // set our world scale as needed
-    game.world.scale.set(this.worldScale);
-    game.camera.x = this.rocket.body.x * this.worldScale - game.camera.width/2;
-    game.camera.y = this.rocket.body.y * this.worldScale - game.camera.height/2;
-
     this.planets.forEach(function (p) { p.update(); });
     this.rocket.update();
-
-    if (!this.game.camera.atLimit.x)
-    {
-        this.starfield.tilePosition.x -= ((this.rocket.body.velocity.x) * this.game.time.physicsElapsed);
-    }
-
-    if (!this.game.camera.atLimit.y)
-    {
-        this.starfield.tilePosition.y -= ((this.rocket.body.velocity.y) * this.game.time.physicsElapsed);
-    }
+    this.rocketCamera.update();
+    this.starfield.update();
 };
 
 astro.LanderStage.prototype.render = function() {
