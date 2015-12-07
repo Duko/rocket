@@ -158,7 +158,7 @@ astro.LanderStage.prototype.create = function() {
     var r = new astro.Rocket(this, {
         maxThrust: 140
     });
-    this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_LOCKON);
+    //this.game.camera.follow(r.sprite, Phaser.Camera.FOLLOW_LOCKON);
     this.game.camera.roundPx = false;
 
     this.starfield = starfield;
@@ -188,10 +188,12 @@ astro.LanderStage.prototype.update = function() {
     }
 
     // set a minimum and maximum scale value
-    this.worldScale = Phaser.Math.clamp(this.worldScale, 0.2, 1.5);
+    this.worldScale = Phaser.Math.clamp(this.worldScale, 0.08, 1.5);
 
     // set our world scale as needed
     game.world.scale.set(this.worldScale);
+    game.camera.x = this.rocket.body.x * this.worldScale - game.camera.width/2;
+    game.camera.y = this.rocket.body.y * this.worldScale - game.camera.height/2;
 
     this.planets.forEach(function (p) { p.update(); });
     this.rocket.update();
