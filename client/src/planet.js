@@ -76,6 +76,8 @@ astro.Planet.prototype.update = function () {
         body.x = parentBody.x + Math.cos(orbitAngle) * orbitRadius;
         body.y = parentBody.y - Math.sin(orbitAngle) * orbitRadius;
     }
+
+
     body.rotation += spinSpeed;
 
     var toRocket = new Phaser.Point(
@@ -99,4 +101,6 @@ astro.Planet.prototype.update = function () {
     rocketBody.x += spinVelocityAtRocket.x;
     rocketBody.y += spinVelocityAtRocket.y;
     rocketBody.rotation += this.spinSpeed * spinDistanceScale;
+
+    this.orbitAngle = orbitAngle;
 };
