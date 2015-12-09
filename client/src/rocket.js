@@ -43,7 +43,7 @@ astro.Rocket = function (game, config) {
     this.game = game;
     this.sprite = sprite;
     this.body = body;
-    this.thrust = 0;
+    this.thrust = 140;
     this.maxThrust = maxThrust;
     this.flame = flame;
     this.thrustOn = false;
@@ -80,6 +80,9 @@ astro.Rocket.prototype.update = function () {
     // Thrust Start
     if (game.input.keyboard.isDown(Phaser.Keyboard.X)) {
         this.thrust = 0;
+    }
+    if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
+        this.thrust = 140;
     }
 
     if (cursors.up.isDown && this.thrust < this.maxThrust) {
