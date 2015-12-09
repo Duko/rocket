@@ -11,7 +11,9 @@ astro.Game = function(divName) {
 };
 
 astro.Game.prototype.run = function() {
-    this.game = new Phaser.Game(1224, 768, Phaser.AUTO, this.divName, this.config);
+    //this.game = new Phaser.Game(1224, 768, Phaser.AUTO, this.divName, this.config);
+    this.game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, this.divName, this.config);
+
 };
 
 astro.Game.prototype.preload = function() {
