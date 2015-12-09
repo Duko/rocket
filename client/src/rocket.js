@@ -100,6 +100,7 @@ astro.Rocket.prototype.update = function () {
         flame.angle = ((sprite.rotation / (Math.PI*2)) * 360) % 360;
         flame.visible = true;
         smokeEmitter.start(true, 700, null, this.thrust/this.maxThrust);
+        smokeEmitter.setAlpha(1, 0, 700);
         body.thrust(this.thrust);
         this.thrustOn = true;
     } else {
