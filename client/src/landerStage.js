@@ -17,16 +17,19 @@ astro.LanderStage.prototype.create = function() {
     this.world.setBounds(-1000, -1000, 500000, 500000);
     this.physics.startSystem(Phaser.Physics.P2JS);
     this.physics.p2.restitution = 0.0;
+    this.physics.p2.friction = 1;
     this.physics.p2.createCollisionGroup();
 
     var starfield = new astro.Starfield(this);
 
     // add "planets"
 
-    var sun = new astro.Planet(this, {
+    var sun = new astro.Planet2(this, {
         key: 'sun',
-        mass: 10000000
+        mass: 9000000,
+        spinSpeed: 0.02
     });
+    this.add.existing(sun);
 
     var planet0 = new astro.Planet(this, {
         key: 'black',
@@ -149,7 +152,7 @@ astro.LanderStage.prototype.create = function() {
         atmoRadius: 500
     });
 
-    planets = this.planets = [sun, planet0, planet1, planet2, planet3, planet4, moonA, moon2A, moon2B, moon4A, moon4B, moon4C];
+    planets = this.planets = [planet0, planet1, planet2, planet3, planet4, moonA, moon2A, moon2B, moon4A, moon4B, moon4C];
 
     // Add rocket and camera following it
     var rocket = new astro.Rocket(this, {
@@ -200,7 +203,7 @@ astro.LanderStage.prototype.render = function() {
 astro.LanderStage.prototype.enableDebug = function() {
     var stage = this;
 
-    this.planets.forEach(function (p) { stage.addDebugToObject(p); });
+    //this.planets.forEach(function (p) { stage.addDebugToObject(p); });
     this.addDebugToObject(this.rocket);
 };
 
