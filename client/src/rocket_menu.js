@@ -84,7 +84,7 @@ astro.RocketMenu.prototype.addMenuItem = function (string, disable) {
     var text = this.game.make.bitmapText(40, 0, 'roboto_mono', string, 64);
 
     text.tint = 0x6fc4ff;
-    text.fontSize = 13;
+    text.fontSize = 15;
     text.align = 'right';
     text.anchor.setTo(0,0);
     item.addChild(text);
