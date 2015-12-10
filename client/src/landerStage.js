@@ -24,134 +24,17 @@ astro.LanderStage.prototype.create = function() {
     var starfield = new astro.Starfield(this);
 
     // add "planets"
-
-    var sun = new astro.Planet2(this, {
-        key: 'sun',
-        mass: 8000000,
-        spinSpeed: 0.02
-    });
-    this.add.existing(sun);
-
-    var planet0 = new astro.Planet2(this, {
-        key: 'black',
-        mass: 4600000,
-        scale: 0.6,
-        parentBody: sun.body,
-        orbitRadius: 3000,
-        orbitSpeed: 0.00008,
-        spinSpeed: 0.1
-    });
-    this.add.existing(planet0);
-
-    var planet1 = new astro.Planet2(this, {
-        key: 'orange',
-        mass: 4200000,
-        scale: 0.7,
-        parentBody: sun.body,
-        orbitRadius: 8000,
-        orbitSpeed: -0.00001,
-        spinSpeed: 0.1
-    });
-    this.add.existing(planet1);
-
-    var moonA = new astro.Planet2(this, {
-        key: 'moon',
-        mass: 1000000,
-        scale: 0.35,
-        parentBody: planet1.body,
-        orbitRadius: 2000,
-        orbitSpeed: 0.0004,
-        spinSpeed: 0.1
-    });
-    this.add.existing(moonA);
-
-    var planet2 = new astro.Planet2(this, {
-        key: 'purple',
-        mass: 16000000,
-        scale: 1.5,
-        parentBody: sun.body,
-        orbitRadius: 18000,
-        orbitSpeed: -0.000001,
-        spinSpeed: 0.1
-    });
-    this.add.existing(planet2);
-
-    var moon2A = new astro.Planet2(this, {
-        key: 'moon',
-        mass: 1400000,
-        scale: 0.5,
-        parentBody: planet2.body,
-        orbitRadius: 3000,
-        orbitSpeed: 0.00004,
-        spinSpeed: 0.1
-    });
-    this.add.existing(moon2A);
-
-    var moon2B = new astro.Planet2(this, {
-        key: 'moon',
-        mass: 1200000,
-        scale: 0.4,
-        parentBody: planet2.body,
-        orbitRadius: 4500,
-        orbitSpeed: -0.00001,
-        spinSpeed: -0.1
-    });
-    this.add.existing(moon2B);
-
-    var planet3 = new astro.Planet2(this, {
-        key: 'green',
-        mass: 46000000,
-        scale: 2.5,
-        parentBody: sun.body,
-        orbitRadius: 32000,
-        orbitSpeed: -0.0000001,
-        spinSpeed: 0.1
-    });
-    this.add.existing(planet3);
-
-    var planet4 = new astro.Planet2(this, {
-        key: 'blue',
-        mass: 33000000,
-        scale: 2.0,
-        parentBody: sun.body,
-        orbitRadius: 45000,
-        orbitSpeed: -0.0000005,
-        spinSpeed: 0.1
-    });
-    this.add.existing(planet4);
-
-    var moon4A = new astro.Planet2(this, {
-        key: 'moon',
-        mass: 1400000,
-        scale: 0.55,
-        parentBody: planet4.body,
-        orbitRadius: 4000,
-        orbitSpeed: 0.00008,
-        spinSpeed: 0.1
-    });
-    this.add.existing(moon4A);
-
-    var moon4B = new astro.Planet2(this, {
-        key: 'moon',
-        mass: 1200000,
-        scale: 0.4,
-        parentBody: planet4.body,
-        orbitRadius: 5500,
-        orbitSpeed: -0.0001,
-        spinSpeed: -0.1
-    });
-    this.add.existing(moon4B);
-
-    var moon4C = new astro.Planet2(this, {
-        key: 'moon',
-        mass: 1450000,
-        scale: 0.58,
-        parentBody: planet4.body,
-        orbitRadius: 9000,
-        orbitSpeed: 0.00006,
-        spinSpeed: 0.1
-    });
-    this.add.existing(moon4C);
+    var addplanet = function (g, c) {
+        var planet = new astro.Planet2(g, c);
+        g.add.existing(planet);
+        if (c.children) {
+            c.children.forEach(function (p) {
+                p.parentBody = planet.body;
+                addplanet(g, p);
+            });
+        }
+    };
+    addplanet(this, astro.config.sun);
 
     // Add rocket and camera following it
     var rocket = new astro.Rocket(this, {
