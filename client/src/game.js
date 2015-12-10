@@ -27,7 +27,7 @@ astro.Game.prototype.create = function() {
     game.state.add('menu', new astro.MenuStage());
     game.state.add('lander', new astro.LanderStage(game));
 
-    game.state.start('lander');
+    game.state.start('menu');
 };
 
 astro.Game.prototype.update = function() {
