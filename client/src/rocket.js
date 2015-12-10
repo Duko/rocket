@@ -24,8 +24,6 @@ astro.Rocket = function (game, config) {
 
     flameAnim.play(10, true);
 
-    game.load.spritesheet('mummy', 'assets/sprites/metalslug_mummy37x45.png', 37, 45, 18);
-
     var sprite = game.add.sprite(game.world.width/2, (game.world.height /2) + 5000, 'rocket');
 
     game.physics.p2.enable(sprite);
@@ -48,6 +46,8 @@ astro.Rocket = function (game, config) {
     this.flame = flame;
     this.thrustOn = false;
     this.smokeEmitter = smokeEmitter;
+
+    this.menu = game.add.existing(new astro.RocketMenu(game, this));
 };
 
 astro.Rocket.preload = function (game) {
