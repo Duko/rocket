@@ -16,8 +16,8 @@ astro.Game.prototype.run = function() {
 
 };
 
-astro.Game.prototype.preload = function() {
-
+astro.Game.prototype.preload = function(game) {
+    game.load.bitmapFont('roboto_mono', 'fonts/roboto_mono/mono_0.png', 'fonts/roboto_mono/mono.fnt');
 };
 
 astro.Game.prototype.create = function() {

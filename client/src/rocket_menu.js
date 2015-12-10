@@ -10,7 +10,7 @@ astro.RocketMenu = function (game, target) {
         'interface',
         'opt_build'
     );
-    this.anchor.setTo(0, 1);
+    this.anchor.setTo(1, 1);
     this.target = target;
     this.game = game;
 
@@ -41,13 +41,15 @@ astro.RocketMenu = function (game, target) {
         this.visible = this.visible ? false : true;
     }.bind(this));
 
-    this.addMenuItem('something', 'optmenu');
-    this.addMenuItem('something', 'optmenu');
-    this.addMenuItem('something', 'optmenu');
-    this.addMenuItem('something', 'optmenu');
-    this.addMenuItem('something', 'optmenu');
-    this.addMenuItem('something', 'optmenu');
-    this.addMenuItem('something', 'optmenu');
+    this.addMenuItem('LAUNCH');
+    this.addMenuItem('REFUEL (100%)', true);
+    this.addMenuItem('BUILD');
+    this.addMenuItem('MANAGEMENT', true);
+    this.addMenuItem('PRODUCTION', true);
+    this.addMenuItem('--- EMPTY ---', true);
+    this.addMenuItem('--- EMPTY ---', true);
+    this.addMenuItem('--- EMPTY ---', true);
+
     this.setActiveItem(this.selectedItem);
     this.visible = false;
 };
@@ -56,7 +58,7 @@ astro.RocketMenu.prototype = Object.create(Phaser.Sprite.prototype);
 astro.RocketMenu.prototype.constructor = astro.RocketMenu;
 
 astro.RocketMenu.preload = function (game) {
-    console.log("preload rocketMEnu");
+    console.log("preload rocketMenu");
     game.load.atlasJSONHash('interface', 'sprites/sheets/interface.png', 'sprites/sheets/interface.json');
 };
 
@@ -70,17 +72,21 @@ astro.RocketMenu.prototype.render = function () {
     console.log("render rocketMEnu");
 };
 
-astro.RocketMenu.prototype.addMenuItem = function (string, image) {
-    var item = this.game.make.sprite(0, -this.itemOffset - (25*this.children.length), 'interface', image);
-    item.anchor.setTo(0, 1);
-    var text = this.game.make.text(40, -3, string);
+astro.RocketMenu.prototype.addMenuItem = function (string, disable) {
+    var item = this.game.make.sprite(0, -this.itemOffset - (22*this.children.length), 'interface', 'optmenu');
+    item.disabled = disable;
+    item.anchor.setTo(0,.15);
 
-    text.font = 'Roboto Mono';
-    text.fontSize = 15;
+    if (disable) {
+        item.alpha = .2;
+    }
+
+    var text = this.game.make.bitmapText(40, 0, 'roboto_mono', string, 64);
+
+    text.tint = 0x6fc4ff;
+    text.fontSize = 13;
     text.align = 'right';
-    text.fill = '#6fc4ff';
-    text.setShadow(0, 0, '#0070cf', 8);
-    text.anchor.setTo(0,1);
+    text.anchor.setTo(0,0);
     item.addChild(text);
     this.addChild(item);
 };
