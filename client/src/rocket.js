@@ -46,6 +46,8 @@ astro.Rocket = function (game, config) {
     this.flame = flame;
     this.thrustOn = false;
     this.smokeEmitter = smokeEmitter;
+
+    this.menu = game.add.existing(new astro.RocketMenu(game, this));
 };
 
 astro.Rocket.preload = function (game) {
