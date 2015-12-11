@@ -22,7 +22,7 @@ astro.Camera.prototype.update = function () {
     }
 
     // set a minimum and maximum scale value
-    this.worldScale = Phaser.Math.clamp(this.worldScale, 0.08, 1.5);
+    this.worldScale = Phaser.Math.clamp(this.worldScale, 0.08, 1);
 
     // set our world scale as needed
     game.world.scale.set(this.worldScale);

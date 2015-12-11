@@ -21,66 +21,38 @@ astro.LanderStage.prototype.create = function() {
     this.physics.p2.friction = 1;
     this.physics.p2.createCollisionGroup();
 
-    var starfield = new astro.Starfield(this);
-
-    // add "planets"
-    var addplanet = function (g, c) {
-        var planet = new astro.Planet(g, c);
-        g.add.existing(planet);
-        if (c.children) {
-            c.children.forEach(function (p) {
-                p.parentBody = planet.body;
-                addplanet(g, p);
-            });
-        }
-    };
-    addplanet(this, astro.config.sun);
-
-    // Add rocket and camera following it
     var rocket = new astro.Rocket(this, {maxThrust: 140 });
-    this.add.existing(rocket);
-
+    var starfield = new astro.Starfield(this, rocket.body);
     var rocketCamera = new astro.Camera(this, rocket.body);
 
-    this.rocket = rocket;
+    // create planets
+    var planetConfigs = [astro.config.sun];
+    var planets = [];
+    while (planetConfigs.length > 0) {
+        var c = planetConfigs.pop();
+        var p = new astro.Planet(this, c);
+        planets.push(p);
+        if (c.children) {
+            c.children.forEach(function (ch) {
+                ch.parentBody = p.body;
+                planetConfigs.push(ch);
+            });
+        }
+    }
+
+    // add stuff to stage.
+    this.add.existing(starfield);
+    for (var i=0; i<planets.length; i++) {
+        this.add.existing(planets[i]);
+    }
+    this.add.existing(rocket);
+
+    // save references
     this.rocketCamera = rocketCamera;
-    this.starfield = starfield;
-
-    this.enableDebug();
-};
-
-astro.LanderStage.prototype.addDebugToObject = function (object) {
-    object.inputEnabled = true;
-    object.events.onInputDown.add(this.addDebugToSprite, this);
-};
-
-astro.LanderStage.prototype.addDebugToSprite = function (item) {
-    this.debugSprite = item;
+    this.gravityTargets = [rocket.body];
 };
 
 astro.LanderStage.prototype.update = function() {
     this.rocketCamera.update();
-    this.starfield.update();
-};
-
-astro.LanderStage.prototype.render = function() {
-    var game = this.game;
-
-    if (this.debugSprite != null) {
-        this.game.debug.spriteCoords(this.debugSprite, 32, this.game.height - 50);
-    }
-    this.game.debug.body(this.rocket.body);
-    this.game.debug.cameraInfo(this.game.camera, 32, 32);
-
-    this.game.debug.text("TH: " + this.rocket.thrust + " On: " + this.rocket.thrustOn, 100, 380 );
-    this.game.debug.text("VX: " + this.rocket.body.velocity.x, 100, 400 );
-    this.game.debug.text("VY: " + this.rocket.body.velocity.y, 100, 420 );
-    this.game.debug.text(game.time.fps, this.game.width - 30, 20);
-};
-
-astro.LanderStage.prototype.enableDebug = function() {
-    var stage = this;
-
-    this.addDebugToObject(this.rocket);
 };
 

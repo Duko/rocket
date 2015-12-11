@@ -1,26 +1,31 @@
 var astro = astro || {};
 
-astro.Starfield = function (game) {
-    var sprite = game.add.tileSprite(0, 0, 20000, 20000, 'bg_stars');
-    sprite.fixedToCamera = true;
-    sprite.anchor.x = 0.5;
-    sprite.anchor.y = 0.5;
-    sprite.cameraOffset.x = game.camera.width/2;
-    sprite.cameraOffset.y = game.camera.height/2;
+astro.Starfield = function (game, target) {
+    Phaser.TileSprite.call(this, game, 0, 0, 20000, 20000, 'bg_stars');
 
-    this.game = game;
-    this.sprite = sprite;
+    this.fixedToCamera = true;
+    this.anchor.x = 0.5;
+    this.anchor.y = 0.5;
+    this.cameraOffset.x = game.camera.width/2;
+    this.cameraOffset.y = game.camera.height/2;
+
+    this.target = target;
 };
+
+astro.Starfield.prototype = Object.create(Phaser.TileSprite.prototype);
+astro.Starfield.prototype.constructor = astro.Starfield;
 
 astro.Starfield.preload = function (game) {
     game.load.image('bg_stars', 'sprites/bg/stars.jpg');
 };
 
 astro.Starfield.prototype.update = function () {
-    var game = this.game,
-        sprite = this.sprite;
+    Phaser.Sprite.prototype.update.call(this);
 
-    sprite.tilePosition.x = game.camera.width - game.rocket.body.x;
-    sprite.tilePosition.y = game.camera.height - game.rocket.body.y;
+    var camera = this.game.camera,
+        target = this.target;
+
+    this.tilePosition.x = camera.width - target.x;
+    this.tilePosition.y = camera.height - target.y;
 };
 

@@ -56,7 +56,7 @@ astro.Planet.prototype.constructor = astro.Planet;
 astro.Planet.prototype.update = function () {
     Phaser.Sprite.prototype.update.call(this);
 
-    var rocketBody = this.game.rocket.body,
+    var gravityTargets = this.game.gravityTargets,
         body = this.body,
         parentBody = this.parentBody,
         orbitSpeed = this.orbitSpeed,
@@ -72,29 +72,14 @@ astro.Planet.prototype.update = function () {
         body.y = parentBody.y - Math.sin(orbitAngle) * orbitRadius;
     }
 
-    // Apply gravity to rocket.
-    var toRocket = new Phaser.Point(
-        rocketBody.x - body.x,
-        rocketBody.y - body.y
-    );
-    var g = 9.8 * (body.mass * rocketBody.mass) / toRocket.getMagnitudeSq();
-    var force = toRocket.clone().setMagnitude(g);
-    rocketBody.force.x -= force.x;
-    rocketBody.force.y -= force.y;
-
-/*
- * Let's try relying on friction while landing and not having this fake atmo for a while.
-    // Apply "atmo spin" to rocket.
-    var spinSpeedAtRocket = body.angularVelocity * toRocket.getMagnitude();
-    var spinDistanceScale = 1 / Math.max(1, (toRocket.getMagnitude() - atmoRadius) * 0.05);
-    if (spinDistanceScale < 0.01)
-        spinDistanceScale = 0;
-    var spinVelocityAtRocket = toRocket.clone().perp().setMagnitude(spinSpeedAtRocket * spinDistanceScale);
-
-    rocketBody.x += spinVelocityAtRocket.x * this.game.time.physicsElapsed;
-    rocketBody.y += spinVelocityAtRocket.y * this.game.time.physicsElapsed;
-    rocketBody.rotation += body.angularVelocity * spinDistanceScale * this.game.time.physicsElapsed;
-*/
+    // Apply gravity pull
+    gravityTargets.forEach(function (targetBody) {
+        var toTarget = new Phaser.Point(targetBody.x - body.x, targetBody.y - body.y);
+        var g = 9.8 * (body.mass * targetBody.mass) / toTarget.getMagnitudeSq();
+        var force = toTarget.clone().setMagnitude(g);
+        targetBody.force.x -= force.x;
+        targetBody.force.y -= force.y;
+    });
 
     this.orbitAngle = orbitAngle;
 };
