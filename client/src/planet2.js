@@ -26,6 +26,13 @@ astro.Planet2 = function (game, config) {
     body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
     body.collides(game.physics.p2.collisionGroups[0]);
 
+    if (parentBody) {
+        var graphics = game.make.graphics(0,0);
+        graphics.lineStyle(1, 0xffffff, 1);
+        graphics.drawCircle(0, 0, 2 * orbitRadius / parentBody.sprite.scale.x);
+        parentBody.sprite.addChild(graphics);
+    }
+
     this.orbitAngle = 0;
     this.orbitRadius = orbitRadius;
     this.orbitSpeed = orbitSpeed;
