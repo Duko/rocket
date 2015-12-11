@@ -1,9 +1,6 @@
 var astro = astro || {};
 
-astro.LanderStage = function(game) {
-    this.game = game;
-    this.debugSprite = null;
-    game.time.advancedTiming = true;
+astro.LanderStage = function() {
 };
 
 astro.LanderStage.prototype.preload = function() {
