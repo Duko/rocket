@@ -40,6 +40,16 @@ astro.Planet2 = function (game, config) {
     this.parentBody = parentBody;
 };
 
+astro.Planet2.preload = function (game) {
+    game.load.image('orange', 'sprites/bodies/orange.png');
+    game.load.image('moon', 'sprites/bodies/moon.png');
+    game.load.image('sun', 'sprites/bodies/sun.png');
+    game.load.image('black', 'sprites/bodies/black.png');
+    game.load.image('purple', 'sprites/bodies/purple.png');
+    game.load.image('green', 'sprites/bodies/green.png');
+    game.load.image('blue', 'sprites/bodies/blue.png');
+};
+
 astro.Planet2.prototype = Object.create(Phaser.Sprite.prototype);
 astro.Planet2.prototype.constructor = astro.Planet2;
 
