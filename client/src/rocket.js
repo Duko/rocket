@@ -37,6 +37,7 @@ astro.Rocket = function (game, config) {
     body.setCollisionGroup(game.physics.p2.collisionGroups[0]);
     body.collides(game.physics.p2.collisionGroups[0]);
     body.mass = 1;
+    body.drag = 0;
 
     this.game = game;
     this.sprite = sprite;
