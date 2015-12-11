@@ -1,6 +1,6 @@
 var astro = astro || {};
 
-astro.Planet2 = function (game, config) {
+astro.Planet = function (game, config) {
     var key = config.key || 'moon',
         mass = config.mass || 1000000,
         scale = config.scale || 1.0,
@@ -40,7 +40,7 @@ astro.Planet2 = function (game, config) {
     this.parentBody = parentBody;
 };
 
-astro.Planet2.preload = function (game) {
+astro.Planet.preload = function (game) {
     game.load.image('orange', 'sprites/bodies/orange.png');
     game.load.image('moon', 'sprites/bodies/moon.png');
     game.load.image('sun', 'sprites/bodies/sun.png');
@@ -50,10 +50,10 @@ astro.Planet2.preload = function (game) {
     game.load.image('blue', 'sprites/bodies/blue.png');
 };
 
-astro.Planet2.prototype = Object.create(Phaser.Sprite.prototype);
-astro.Planet2.prototype.constructor = astro.Planet2;
+astro.Planet.prototype = Object.create(Phaser.Sprite.prototype);
+astro.Planet.prototype.constructor = astro.Planet;
 
-astro.Planet2.prototype.update = function () {
+astro.Planet.prototype.update = function () {
     Phaser.Sprite.prototype.update.call(this);
 
     var rocketBody = this.game.rocket.body,

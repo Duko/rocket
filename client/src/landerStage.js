@@ -7,7 +7,7 @@ astro.LanderStage = function(game) {
 };
 
 astro.LanderStage.prototype.preload = function() {
-    astro.Planet2.preload(this);
+    astro.Planet.preload(this);
     astro.Rocket.preload(this);
     astro.Starfield.preload(this);
     astro.RocketMenu.preload(this);
@@ -25,7 +25,7 @@ astro.LanderStage.prototype.create = function() {
 
     // add "planets"
     var addplanet = function (g, c) {
-        var planet = new astro.Planet2(g, c);
+        var planet = new astro.Planet(g, c);
         g.add.existing(planet);
         if (c.children) {
             c.children.forEach(function (p) {
