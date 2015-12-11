@@ -7,7 +7,7 @@ astro.LanderStage = function(game) {
 };
 
 astro.LanderStage.prototype.preload = function() {
-    astro.Planet.preload(this);
+    astro.Planet2.preload(this);
     astro.Rocket.preload(this);
     astro.Starfield.preload(this);
     astro.RocketMenu.preload(this);
