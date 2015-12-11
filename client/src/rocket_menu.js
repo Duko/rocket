@@ -6,7 +6,7 @@ astro.RocketMenu = function (game, target) {
     this.selectedItem = 0;
     Phaser.Sprite.call(this,
         game,
-        target.sprite.x, target.sprite.y - this.offset,
+        target.x, target.y - this.offset,
         'interface',
         'opt_build'
     );
@@ -64,8 +64,8 @@ astro.RocketMenu.preload = function (game) {
 
 astro.RocketMenu.prototype.update = function () {
     console.log("update rocketMEnu");
-    this.x = this.target.sprite.x;
-    this.y = this.target.sprite.y - this.offset;
+    this.x = this.target.x;
+    this.y = this.target.y - this.offset;
 };
 
 astro.RocketMenu.prototype.render = function () {

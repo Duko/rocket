@@ -37,12 +37,12 @@ astro.LanderStage.prototype.create = function() {
     addplanet(this, astro.config.sun);
 
     // Add rocket and camera following it
-    var rocket = new astro.Rocket(this, {
-        maxThrust: 140
-    });
+    var rocket = new astro.Rocket(this, {maxThrust: 140 });
+    this.add.existing(rocket);
+
     var rocketCamera = new astro.Camera(this, rocket.body);
 
-    player = this.rocket = rocket;
+    this.rocket = rocket;
     this.rocketCamera = rocketCamera;
     this.starfield = starfield;
 
@@ -50,8 +50,8 @@ astro.LanderStage.prototype.create = function() {
 };
 
 astro.LanderStage.prototype.addDebugToObject = function (object) {
-    object.sprite.inputEnabled = true;
-    object.sprite.events.onInputDown.add(this.addDebugToSprite, this);
+    object.inputEnabled = true;
+    object.events.onInputDown.add(this.addDebugToSprite, this);
 };
 
 astro.LanderStage.prototype.addDebugToSprite = function (item) {
@@ -59,7 +59,6 @@ astro.LanderStage.prototype.addDebugToSprite = function (item) {
 };
 
 astro.LanderStage.prototype.update = function() {
-    this.rocket.update();
     this.rocketCamera.update();
     this.starfield.update();
 };
@@ -77,7 +76,6 @@ astro.LanderStage.prototype.render = function() {
     this.game.debug.text("VX: " + this.rocket.body.velocity.x, 100, 400 );
     this.game.debug.text("VY: " + this.rocket.body.velocity.y, 100, 420 );
     this.game.debug.text(game.time.fps, this.game.width - 30, 20);
-    this.rocket.render(this);
 };
 
 astro.LanderStage.prototype.enableDebug = function() {
