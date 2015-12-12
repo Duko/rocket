@@ -25,7 +25,9 @@ astro.Starfield.prototype.update = function () {
     var camera = this.game.camera,
         target = this.target;
 
-    this.tilePosition.x = camera.width - target.x;
-    this.tilePosition.y = camera.height - target.y;
+    if (target) {
+        this.tilePosition.x = camera.width - target.x;
+        this.tilePosition.y = camera.height - target.y;
+    }
 };
 
