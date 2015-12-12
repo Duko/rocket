@@ -10,11 +10,16 @@ astro.MenuStage.prototype.preload = function(game) {
     game.load.image('logo','sprites/misc/logo.png');
     game.load.image('btnStart','sprites/misc/btn_start.png');
 
+    game.load.audio('musicTitle', ['sounds/menu_ambient.mp3']);
+
 };
 
 astro.MenuStage.prototype.create = function(game) {
     // console.log('menustage create');
 
+    music = game.add.audio('musicTitle');
+    music.volume = 0.1;
+    music.play();
 
     var starfield = new astro.Starfield(this);
     this.add.existing(starfield);
