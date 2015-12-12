@@ -109,5 +109,119 @@ astro.config = {
                 spinSpeed: 0.005
             }
         ]
-    }
+    },
+    rocketMenu: [
+        {
+            name: 'LAUNCH',
+            disabled: false
+        },
+        {
+            name: 'BUILD',
+            disabled: false,
+            subMenu: [
+                {
+                    name: 'LANDING PAD',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'OXYGEN GENERATOR',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'FUEL EXTRACTOR',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'PRODUCTION',
+            disabled: false,
+            subMenu: [
+                {
+                    name: 'LANDING PAD',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'MANAGEMENT',
+            disabled: false,
+            subMenu: [
+                {
+                    name: 'LANDING PAD',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 };

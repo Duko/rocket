@@ -19,6 +19,7 @@ astro.LanderStage.prototype.create = function() {
     this.physics.p2.createCollisionGroup();
 
     var rocket = new astro.Rocket(this, {maxThrust: 140 });
+    var rocketMenu = new astro.RocketMenu(this, rocket);
     var starfield = new astro.Starfield(this, rocket.body);
     var rocketCamera = new astro.Camera(this, rocket.body);
 
@@ -43,6 +44,7 @@ astro.LanderStage.prototype.create = function() {
         this.add.existing(planets[i]);
     }
     this.add.existing(rocket);
+    this.add.existing(rocketMenu);
 
     // save references
     this.rocketCamera = rocketCamera;
