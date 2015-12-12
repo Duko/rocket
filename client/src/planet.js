@@ -28,7 +28,7 @@ astro.Planet = function (game, config) {
 
     if (parentBody) {
         var graphics = game.make.graphics(0,0);
-        graphics.lineStyle(1, 0xffffff, 1);
+        graphics.lineStyle(1, 0x2c5372, 1);
         graphics.drawCircle(0, 0, 2 * orbitRadius / parentBody.sprite.scale.x);
         parentBody.sprite.addChild(graphics);
     }
@@ -48,6 +48,7 @@ astro.Planet.preload = function (game) {
     game.load.image('purple', 'sprites/bodies/purple.png');
     game.load.image('green', 'sprites/bodies/green.png');
     game.load.image('blue', 'sprites/bodies/blue.png');
+    game.load.image('white', 'sprites/bodies/white.png');
 };
 
 astro.Planet.prototype = Object.create(Phaser.Sprite.prototype);

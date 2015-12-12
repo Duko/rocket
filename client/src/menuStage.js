@@ -1,7 +1,6 @@
 var astro = astro || {};
 
-astro.MenuStage = function(game) {
-    this.game = game;
+astro.MenuStage = function() {
 };
 
 astro.MenuStage.prototype.preload = function(game) {
@@ -17,7 +16,7 @@ astro.MenuStage.prototype.create = function(game) {
     // console.log('menustage create');
 
 
-    var starfield = new astro.Starfield(this);
+    starfield = new astro.Starfield(this);
 
     logo = game.add.sprite(game.width/2,game.height*0.2, 'logo');
     logo.alpha = 0;

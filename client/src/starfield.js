@@ -16,7 +16,7 @@ astro.Starfield.prototype = Object.create(Phaser.TileSprite.prototype);
 astro.Starfield.prototype.constructor = astro.Starfield;
 
 astro.Starfield.preload = function (game) {
-    game.load.image('bg_stars', 'sprites/bg/stars.jpg');
+    game.load.image('bg_stars', 'sprites/bg/stars2.jpg');
 };
 
 astro.Starfield.prototype.update = function () {
