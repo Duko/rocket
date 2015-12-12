@@ -4,7 +4,7 @@ astro.MenuStage = function() {
 };
 
 astro.MenuStage.prototype.preload = function(game) {
-    
+
     astro.Starfield.preload(this);
     game.load.image('menuplanet', 'sprites/bodies/blue.png');
     game.load.image('logo','sprites/misc/logo.png');
@@ -16,14 +16,15 @@ astro.MenuStage.prototype.create = function(game) {
     // console.log('menustage create');
 
 
-    starfield = new astro.Starfield(this);
+    var starfield = new astro.Starfield(this);
+    this.add.existing(starfield);
 
     logo = game.add.sprite(game.width/2,game.height*0.2, 'logo');
     logo.alpha = 0;
     logo.anchor.setTo(0.5, 0.5);
     logo.scale.setTo(((100/1080)*game.height)/100,((100/1080)*game.height)/100);
     game.add.tween(logo).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true);
-    
+
     menuplanet = game.add.sprite(game.width/2,(game.height*1.4), 'menuplanet');
     menuplanet.anchor.setTo(0.5, 0.5);
     menuplanet.scale.setTo(((100/1080)*game.height)/100,((100/1080)*game.height)/100);
@@ -42,7 +43,7 @@ astro.MenuStage.prototype.create = function(game) {
 
     // this.menu = menu;
 
-    
+
 
     // var startText = astro.createText(this, 20, "START GAME");
     //     startText.x = this.world.centerX;
@@ -54,7 +55,7 @@ astro.MenuStage.prototype.create = function(game) {
     //     startText.alpha = 0;
     //     game.add.tween(startText).to( { alpha: 1 }, 3000, Phaser.Easing.Linear.None, true);
 
-        
+
 
     // menu.add(startText);
     // menu.x = 0;
