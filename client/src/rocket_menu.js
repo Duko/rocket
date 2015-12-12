@@ -3,6 +3,8 @@ var astro = astro || {};
 astro.RocketMenu = function (game, target) {
     this.activeMenu = 0;
     this.selectedItem = 0;
+    this.menuOffset = 0;
+    this.menuWidth = 0;
     this.menues = [];
     Phaser.Group.call(this,
         game,
@@ -34,13 +36,17 @@ astro.RocketMenu = function (game, target) {
         }
     }.bind(this));
     this.left.onDown.add(function () {
-        var selectedMenuItem = this.activeMenu.getChildAt(this.activeMenu.selectedItem);
-        console.log(this.activeMenu.parent, selectedMenuItem.parent);
+        this.menuOffset = 0;
+        this.activeMenu.alpha = 0.2;
+        this.mainMenu.alpha = 1;
         this.activeMenu = this.mainMenu;
     }.bind(this));
     this.right.onDown.add(function () {
         var selectedMenuItem = this.activeMenu.getChildAt(this.activeMenu.selectedItem);
         if (selectedMenuItem.subMenu) {
+            this.activeMenu.alpha = 0.2;
+            selectedMenuItem.subMenu.alpha = 1;
+            this.menuOffset = -selectedMenuItem.width;
             this.activeMenu = selectedMenuItem.subMenu;
         }
     }.bind(this));
@@ -56,6 +62,8 @@ astro.RocketMenu = function (game, target) {
 
     this.activeMenu.setActiveItem(this.activeMenu.selectedItem);
 
+    this.menuWidth = this.activeMenu.getChildAt(this.activeMenu.selectedItem).width;
+
     this.visible = false;
 };
 
@@ -67,14 +75,8 @@ astro.RocketMenu.preload = function (game) {
 };
 
 astro.RocketMenu.prototype.update = function () {
-    this.x = this.target.x;
+    this.x = this.target.x + this.menuOffset - (this.menuWidth/2);
     this.y = this.target.y - (this.height + 70);
-
-    for (var i = 0; i < this.children.length; i++) {
-        var obj = astro[i];
-
-    }
-
 };
 
 astro.RocketMenu.prototype.render = function () {
@@ -103,7 +105,7 @@ astro.RocketMenuList = function (game, parent, name, config) {
             if (config[i].subMenu) {
                 var item = this.addMenuItem(config[i].name + ">", config[i].disabled);
                 item.subMenu = new astro.RocketMenuList(game, this, config[i].name + 'SubMenu', config[i].subMenu);
-                item.subMenu.alpha = 1;
+                item.subMenu.alpha = .2;
                 item.subMenu.x += item.width;
                 item.subMenu.visible = false;
                 item.parent.parent.addChild(item.subMenu);
