@@ -116,7 +116,7 @@ astro.config = {
             disabled: false
         },
         {
-            name: 'REFUEL[100%]',
+            name: 'RECHARGE[87%]',
             disabled: false
         },
         {
@@ -178,6 +178,24 @@ astro.config = {
                     ]
                 },
                 {
+                    name: 'MINING RIG',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                },
+                {
                     name: 'SCAN-SAT',
                     disabled: false,
                     cost: [
@@ -197,7 +215,7 @@ astro.config = {
                 },
                 {
                     name: 'STORAGE POD',
-                    disabled: false,
+                    disabled: true,
                     cost: [
                         {
                             name: 'Titanium',
@@ -215,7 +233,7 @@ astro.config = {
                 },
                 {
                     name: 'SHIP BAY',
-                    disabled: false,
+                    disabled: true,
                     cost: [
                         {
                             name: 'Titanium',
@@ -233,7 +251,7 @@ astro.config = {
                 },
                 {
                     name: 'SCIENCE LAB',
-                    disabled: false,
+                    disabled: true,
                     cost: [
                         {
                             name: 'Titanium',
@@ -253,10 +271,35 @@ astro.config = {
         },
         {
             name: 'PRODUCTION',
-            disabled: false,
+            disabled: true,
             subMenu: [
                 {
-                    name: 'LANDING PAD',
+                    name: 'NO PRODUCTION!',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                }
+            ]
+        },
+        
+        {
+            name: 'MANAGEMENT',
+            disabled: true,
+            subMenu: [
+                {
+                    name: 'OUT OF RANGE!',
                     disabled: false,
                     cost: [
                         {
@@ -276,28 +319,17 @@ astro.config = {
             ]
         },
         {
-            name: 'MANAGEMENT',
-            disabled: false,
-            subMenu: [
-                {
-                    name: 'LANDING PAD',
-                    disabled: false,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
-                }
-            ]
+            name: 'INVENTORY',
+            disabled: true
+        },
+        {
+            name: 'CHANGE SHIP',
+            disabled: true
+        },
+        {
+            name: 'INFORMATION',
+            disabled: false
         }
+
     ]
 };
