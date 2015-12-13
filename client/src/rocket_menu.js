@@ -60,6 +60,10 @@ astro.RocketMenu = function (game, target) {
 
     this.mainMenu = this.activeMenu = mainMenu;
 
+    var background = this.game.make.sprite(0, 0, 'rocket_menu_interface', 'opt_bg');
+    this.addChild(background);
+    this.background = background;
+
     this.activeMenu.setActiveItem(this.activeMenu.selectedItem);
 
     this.menuWidth = this.activeMenu.getChildAt(this.activeMenu.selectedItem).width;
@@ -71,11 +75,12 @@ astro.RocketMenu.prototype = Object.create(Phaser.Group.prototype);
 astro.RocketMenu.prototype.constructor = astro.RocketMenu;
 
 astro.RocketMenu.preload = function (game) {
-    game.load.atlasJSONHash('interface', 'sprites/sheets/interface.png', 'sprites/sheets/interface.json');
+    game.load.atlasJSONHash('rocket_menu_interface', 'sprites/interface/rocket_menu.png', 'sprites/interface/rocket_menu.json');
 };
 
 astro.RocketMenu.prototype.update = function () {
     this.x = this.target.x + this.menuOffset - (this.menuWidth/2);
+    this.background.x = -this.menuOffset;
     this.y = this.target.y - (this.height + 70);
 };
 
@@ -109,7 +114,6 @@ astro.RocketMenuList = function (game, parent, name, config) {
                 item.subMenu.x += item.width;
                 item.subMenu.visible = false;
                 item.parent.parent.addChild(item.subMenu);
-                console.log("submenu", item.subMenu, item.parent.parent.menues);
             } else {
                 var item = this.addMenuItem(config[i].name, config[i].disabled);
             }
@@ -130,11 +134,11 @@ astro.RocketMenuList.prototype.update = function (game) {
 astro.RocketMenuList.prototype.setActiveItem = function (index) {
     var previousItem = this.getChildAt(this.selectedItem);
     var newItem = this.getChildAt(index);
-    previousItem.loadTexture('interface', 'optmenu');
+    previousItem.loadTexture('rocket_menu_interface', 'opt_entry');
     if (previousItem.subMenu) {
         previousItem.subMenu.visible = false;
     }
-    newItem.loadTexture('interface', 'optmenu_selected');
+    newItem.loadTexture('rocket_menu_interface', 'opt_entry_selected');
     if (newItem.subMenu) {
         newItem.subMenu.visible = true;
     }
@@ -142,7 +146,7 @@ astro.RocketMenuList.prototype.setActiveItem = function (index) {
 };
 
 astro.RocketMenuList.prototype.addMenuItem = function (string, disable) {
-    var item = this.create(0, 0, 'interface', 'optmenu');
+    var item = this.create(0, 0, 'rocket_menu_interface', 'opt_entry');
     item.y = item.height*(this.children.length - 1);
     item.disabled = disable;
     item.anchor.setTo(0,0);
