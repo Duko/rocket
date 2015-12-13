@@ -105,7 +105,7 @@ astro.RocketMenuList = function (game, parent, name, config) {
         name
     );
 
-    for (var i = 6; i >= 0; i--) {
+    for (var i = 7; i >= 0; i--) {
         if (config[i]) {
             if (config[i].subMenu) {
                 var item = this.addMenuItem(config[i].name + ">", config[i].disabled);
