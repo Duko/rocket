@@ -88,14 +88,6 @@ astro.RocketMenu.prototype.render = function () {
     console.log("render rocketMEnu");
 };
 
-astro.RocketMenu.prototype.setActiveItem = function (index) {
-    var item = this.getChildAt(index);
-};
-
-astro.RocketMenu.prototype.setInactiveItem = function (index) {
-    var item = this.getChildAt(index);
-};
-
 astro.RocketMenuList = function (game, parent, name, config) {
     console.log("RocketMenuList contructor");
     this.selectedItem = 0;
@@ -108,7 +100,7 @@ astro.RocketMenuList = function (game, parent, name, config) {
     for (var i = 7; i >= 0; i--) {
         if (config[i]) {
             if (config[i].subMenu) {
-                var item = this.addMenuItem(config[i].name + ">", config[i].disabled);
+                var item = this.addMenuItem(config[i].name + ">", config[i].disabled, true);
                 item.subMenu = new astro.RocketMenuList(game, this, config[i].name + 'SubMenu', config[i].subMenu);
                 item.subMenu.alpha = .2;
                 item.subMenu.x += item.width;
@@ -134,19 +126,29 @@ astro.RocketMenuList.prototype.update = function (game) {
 astro.RocketMenuList.prototype.setActiveItem = function (index) {
     var previousItem = this.getChildAt(this.selectedItem);
     var newItem = this.getChildAt(index);
-    previousItem.loadTexture('rocket_menu_interface', 'opt_entry');
     if (previousItem.subMenu) {
+        previousItem.loadTexture('rocket_menu_interface', 'opt_entry_arrow');
         previousItem.subMenu.visible = false;
+    } else {
+        previousItem.loadTexture('rocket_menu_interface', 'opt_entry');
     }
-    newItem.loadTexture('rocket_menu_interface', 'opt_entry_selected');
+
     if (newItem.subMenu) {
+        newItem.loadTexture('rocket_menu_interface', 'opt_entry_selected_arrow');
         newItem.subMenu.visible = true;
+    } else {
+        newItem.loadTexture('rocket_menu_interface', 'opt_entry_selected');
     }
     this.selectedItem = index;
 };
 
-astro.RocketMenuList.prototype.addMenuItem = function (string, disable) {
-    var item = this.create(0, 0, 'rocket_menu_interface', 'opt_entry');
+astro.RocketMenuList.prototype.addMenuItem = function (string, disable, hasSubmenu) {
+    var item = null;
+    if (hasSubmenu) {
+        var item = this.create(0, 0, 'rocket_menu_interface', 'opt_entry_arrow');
+    } else {
+        var item = this.create(0, 0, 'rocket_menu_interface', 'opt_entry');
+    }
     item.y = item.height*(this.children.length - 1);
     item.disabled = disable;
     item.anchor.setTo(0,0);
