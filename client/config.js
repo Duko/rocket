@@ -126,146 +126,170 @@ astro.config = {
                 {
                     name: 'LANDING PAD',
                     disabled: false,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        image: 'building_oxygen',
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 },
                 {
                     name: 'OXYGEN GENERATOR',
                     disabled: false,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        image: 'building_oxygen',
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 },
                 {
                     name: 'FUEL EXTRACTOR',
                     disabled: false,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        image: 'building_oxygen',
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 },
                 {
                     name: 'MINING RIG',
                     disabled: false,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        image: 'building_oxygen',
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 },
                 {
                     name: 'SCAN-SAT',
                     disabled: false,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        image: 'building_oxygen',
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 },
                 {
                     name: 'STORAGE POD',
                     disabled: true,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        image: 'building_oxygen',
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 },
                 {
                     name: 'SHIP BAY',
                     disabled: true,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        image: 'building_oxygen',
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 },
                 {
                     name: 'SCIENCE LAB',
                     disabled: true,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        image: 'building_oxygen',
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 }
             ]
         },
@@ -276,20 +300,22 @@ astro.config = {
                 {
                     name: 'NO PRODUCTION!',
                     disabled: false,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 }
             ]
         },
@@ -301,20 +327,22 @@ astro.config = {
                 {
                     name: 'OUT OF RANGE!',
                     disabled: false,
-                    cost: [
-                        {
-                            name: 'Titanium',
-                            amount: 25
-                        },
-                        {
-                            name: 'Silicone',
-                            amount: 10
-                        },
-                        {
-                            name: 'Crystal',
-                            amount: 2
-                        }
-                    ]
+                    buildingInfo: {
+                        materials: [
+                            {
+                                name: 'Titanium',
+                                amount: 25
+                            },
+                            {
+                                name: 'Silicone',
+                                amount: 10
+                            },
+                            {
+                                name: 'Crystal',
+                                amount: 2
+                            }
+                        ]
+                    }
                 }
             ]
         },

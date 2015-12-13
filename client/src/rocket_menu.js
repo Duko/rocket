@@ -36,6 +36,7 @@ astro.RocketMenu = function (game, target) {
         }
     }.bind(this));
     this.left.onDown.add(function () {
+        this.activeMenu.setInactiveItem(this.activeMenu.selectedItem);
         this.menuOffset = 0;
         this.activeMenu.alpha = 0.2;
         this.mainMenu.alpha = 1;
@@ -48,6 +49,7 @@ astro.RocketMenu = function (game, target) {
             selectedMenuItem.subMenu.alpha = 1;
             this.menuOffset = -selectedMenuItem.width;
             this.activeMenu = selectedMenuItem.subMenu;
+            this.activeMenu.setActiveItem(this.activeMenu.selectedItem);
         }
     }.bind(this));
     this.esc.onDown.add(function () {
@@ -76,6 +78,7 @@ astro.RocketMenu.prototype.constructor = astro.RocketMenu;
 
 astro.RocketMenu.preload = function (game) {
     game.load.atlasJSONHash('rocket_menu_interface', 'sprites/interface/rocket_menu.png', 'sprites/interface/rocket_menu.json');
+    game.load.atlasJSONHash('rocket_menu_interface_buildings', 'sprites/interface/buildings.png', 'sprites/interface/buildings.json');
 };
 
 astro.RocketMenu.prototype.update = function () {
@@ -87,6 +90,8 @@ astro.RocketMenu.prototype.update = function () {
 astro.RocketMenu.prototype.render = function () {
     console.log("render rocketMEnu");
 };
+
+// ------- Menu List ---------
 
 astro.RocketMenuList = function (game, parent, name, config) {
     console.log("RocketMenuList contructor");
@@ -106,6 +111,13 @@ astro.RocketMenuList = function (game, parent, name, config) {
                 item.subMenu.x += item.width;
                 item.subMenu.visible = false;
                 item.parent.parent.addChild(item.subMenu);
+            } else if (config[i].buildingInfo && !config[i].disabled) {
+                var item = this.addMenuItem(config[i].name, config[i].disabled, true);
+                item.cost = new astro.RocketMenuCost(game, this, config[i].buildingInfo);
+                item.cost.alpha = .0;
+                item.cost.x += item.width*2;
+                item.cost.visible = false;
+                item.parent.parent.parent.addChild(item.cost);
             } else {
                 var item = this.addMenuItem(config[i].name, config[i].disabled);
             }
@@ -113,7 +125,8 @@ astro.RocketMenuList = function (game, parent, name, config) {
             this.addMenuItem('--- EMPTY ---', true);
         }
     }
-    this.setActiveItem(this.children.length-1);
+
+    this.selectedItem = this.children.length-1;
 };
 
 astro.RocketMenuList.prototype = Object.create(Phaser.Group.prototype);
@@ -129,6 +142,9 @@ astro.RocketMenuList.prototype.setActiveItem = function (index) {
     if (previousItem.subMenu) {
         previousItem.loadTexture('rocket_menu_interface', 'opt_entry_arrow');
         previousItem.subMenu.visible = false;
+    } else if (previousItem.cost) {
+        previousItem.loadTexture('rocket_menu_interface', 'opt_entry_arrow');
+        previousItem.cost.alpha = 0;
     } else {
         previousItem.loadTexture('rocket_menu_interface', 'opt_entry');
     }
@@ -136,9 +152,29 @@ astro.RocketMenuList.prototype.setActiveItem = function (index) {
     if (newItem.subMenu) {
         newItem.loadTexture('rocket_menu_interface', 'opt_entry_selected_arrow');
         newItem.subMenu.visible = true;
-    } else {
+    } else if (newItem.cost) {
+        newItem.loadTexture('rocket_menu_interface', 'opt_entry_selected_arrow');
+        newItem.cost.alpha = 1;
+        newItem.cost.visible = true;
+    } else  {
         newItem.loadTexture('rocket_menu_interface', 'opt_entry_selected');
     }
+
+    this.selectedItem = index;
+};
+
+astro.RocketMenuList.prototype.setInactiveItem = function (index) {
+    var item = this.getChildAt(index);
+    if (item.subMenu) {
+        item.loadTexture('rocket_menu_interface', 'opt_entry_arrow');
+        item.subMenu.visible = false;
+    } else if (item.cost) {
+        item.loadTexture('rocket_menu_interface', 'opt_entry_arrow');
+        item.cost.alpha = 0;
+    } else {
+        item.loadTexture('rocket_menu_interface', 'opt_entry');
+    }
+
     this.selectedItem = index;
 };
 
@@ -165,3 +201,53 @@ astro.RocketMenuList.prototype.addMenuItem = function (string, disable, hasSubme
     return item;
 };
 
+// ------- Cost List ---------
+
+astro.RocketMenuCost = function (game, parent, config) {
+    this.selectedItem = 0;
+    Phaser.Sprite.call(this,
+        game,
+        parent.x, parent.y,
+        'rocket_menu_interface', 'bld_bg'
+    );
+
+    var building = null;
+    if (config.image) {
+        building = game.make.sprite(0, 0, 'rocket_menu_interface_buildings', config.image);
+    }
+
+    if (building) {
+        building.anchor.setTo(.5,1);
+        building.position.setTo(this.width/2, this.height/2);
+        this.addChild(building);
+    }
+
+    var menuOffset = 10;
+    var textSpacing = 3;
+
+    var materials = config.materials;
+
+    for (var i = 0; i < materials.length; i++) {
+        var name = game.make.bitmapText(this.width*0.1, this.height/2, 'roboto_mono', ""+materials[i].name, 15);
+        name.tint = 0x6fc4ff;
+        name.align = 'right';
+        name.y += menuOffset + textSpacing + (name.textHeight*i);
+
+        var amount = game.make.bitmapText(this.width*0.9, this.height/2, 'roboto_mono', ""+materials[i].amount, 15);
+        amount.tint = 0x6fc4ff;
+        amount.align = 'left';
+        amount.anchor.setTo(1, 0);
+        amount.y += menuOffset + textSpacing + (name.textHeight*i);
+
+        this.addChild(name);
+        this.addChild(amount);
+    }
+
+};
+
+astro.RocketMenuCost.preload = function (game) {
+
+};
+
+astro.RocketMenuCost.prototype = Object.create(Phaser.Sprite.prototype);
+astro.RocketMenuCost.prototype.constructor = astro.RocketMenuCost;
