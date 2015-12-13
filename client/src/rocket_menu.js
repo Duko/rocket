@@ -100,7 +100,7 @@ astro.RocketMenuList = function (game, parent, name, config) {
     for (var i = 7; i >= 0; i--) {
         if (config[i]) {
             if (config[i].subMenu) {
-                var item = this.addMenuItem(config[i].name + ">", config[i].disabled, true);
+                var item = this.addMenuItem(config[i].name, config[i].disabled, true);
                 item.subMenu = new astro.RocketMenuList(game, this, config[i].name + 'SubMenu', config[i].subMenu);
                 item.subMenu.alpha = .2;
                 item.subMenu.x += item.width;
