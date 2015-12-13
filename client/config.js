@@ -102,7 +102,7 @@ astro.config = {
             },
             {
                 key: 'white',
-                mass: 16500000,
+                mass: 12500000,
                 scale: 1,
                 orbitRadius: 100000,
                 orbitSpeed: -0.000001,
