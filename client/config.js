@@ -116,6 +116,10 @@ astro.config = {
             disabled: false
         },
         {
+            name: 'REFUEL[100%]',
+            disabled: false
+        },
+        {
             name: 'BUILD',
             disabled: false,
             subMenu: [
@@ -157,6 +161,78 @@ astro.config = {
                 },
                 {
                     name: 'FUEL EXTRACTOR',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'SCAN-SAT',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'STORAGE POD',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'SHIP BAY',
+                    disabled: false,
+                    cost: [
+                        {
+                            name: 'Titanium',
+                            amount: 25
+                        },
+                        {
+                            name: 'Silicone',
+                            amount: 10
+                        },
+                        {
+                            name: 'Crystal',
+                            amount: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'SCIENCE LAB',
                     disabled: false,
                     cost: [
                         {
